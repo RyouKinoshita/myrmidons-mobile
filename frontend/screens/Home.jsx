@@ -4,6 +4,8 @@ import { defaultStyle, colors } from "../styles/styles";
 import { Avatar, Button } from "react-native-paper";
 import Header from "../components/Header";
 import SearchModal from "../components/SearchModal";
+import ProductCard from "../components/ProductCard";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 const categories = [
   { category: "Digital Marketing", _id: "digitalmarketing" },
   { category: "Social Media Management", _id: "smm" },
@@ -13,11 +15,23 @@ const categories = [
 const products = [
   {
     price: 12345,
+    stock: 5,
     name: "product1",
     _id: "prod1",
     images: [
       {
-        url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpikwizard.com%2F&psig=AOvVaw3Ei0Ea7jYrbya6b-YSja1N&ust=1711658397023000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOjD3cmmlYUDFQAAAAAdAAAAABAR",
+        url: "https://picsum.photos/id/7/400/300",
+      },
+    ],
+  },
+  {
+    price: 54321,
+    stock: 2,
+    name: "product2",
+    _id: "prod2",
+    images: [
+      {
+        url: "https://picsum.photos/id/45/400/300",
       },
     ],
   },
@@ -27,8 +41,33 @@ const Home = () => {
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const navigate = useNavigation();
+
   const categoryButtonHandler = (id) => {
     setCategory(id);
+  };
+  const addToCardHandler = (id, name, price, image, stock) => {
+    // if (stock === 0)
+    //   return Toast.show({
+    //     type: "error",
+    //     text1: "Out Of Stock",
+    //   });
+    // dispatch({
+    //   type: "addToCart",
+    //   payload: {
+    //     product: id,
+    //     name,
+    //     price,
+    //     image,
+    //     stock,
+    //     quantity: 1,
+    //   },
+    // });
+    // Toast.show({
+    //   type: "success",
+    //   text1: "Added To Cart",
+    // });
+    console.log("Add to cart", id);
   };
 
   // const categories = [
@@ -126,23 +165,23 @@ const Home = () => {
         </View>
 
         {/* Products */}
-        {/* <View style={{ flex: 1 }}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {products.map((item, index) => (
-            <ProductCard
-              stock={item.stock}
-              name={item.name}
-              price={item.price}
-              image={item.images[0]?.url}
-              addToCardHandler={addToCardHandler}
-              id={item._id}
-              key={item._id}
-              i={index}
-              navigate={navigate}
-            />
-          ))}
-        </ScrollView>
-      </View> */}
+        <View style={{ flex: 1 }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {products.map((item, index) => (
+              <ProductCard
+                stock={item.stock}
+                name={item.name}
+                price={item.price}
+                image={item.images[0]?.url}
+                addToCardHandler={addToCardHandler}
+                id={item._id}
+                key={item._id}
+                i={index}
+                navigate={navigate}
+              />
+            ))}
+          </ScrollView>
+        </View>
       </View>
     </>
   );
