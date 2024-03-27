@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import SearchModal from "../components/SearchModal";
 import ProductCard from "../components/ProductCard";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
+import Footer from "../components/Footer";
 const categories = [
   { category: "Digital Marketing", _id: "digitalmarketing" },
   { category: "Social Media Management", _id: "smm" },
@@ -183,6 +184,8 @@ const Home = () => {
           </ScrollView>
         </View>
       </View>
+
+      <Footer activeRoute={"home"} />
     </>
   );
 };
