@@ -18,6 +18,15 @@ import { useIsFocused } from "@react-navigation/native";
 
 const SLIDER_WIDTH = Dimensions.get("window").width;
 const ITEM_WIDTH = SLIDER_WIDTH;
+export const iconOptions = {
+  size: 20,
+  style: {
+    borderRadius: 5,
+    backgroundColor: colors.color5,
+    height: 25,
+    width: 25,
+  },
+};
 
 const images = [
   {
@@ -31,7 +40,25 @@ const images = [
 ];
 
 const ProductDetails = ({ route: { params } }) => {
+  const name = "Yes";
+  const price = 1234;
+  const description = "yesyesyes";
+  const stock = 20;
   const isCarousel = useRef(null);
+  const [quantity, setQuantity] = useState(1);
+
+  const incrementQty = () => {
+    if (stock <= quantity)
+      return Toast.show({
+        type: "error",
+        text1: "Maximum Value Added",
+      });
+    setQuantity((prev) => prev + 1);
+  };
+  const decrementQty = () => {
+    if (quantity <= 1) return;
+    setQuantity((prev) => prev - 1);
+  };
   return (
     <View
       style={{
@@ -41,7 +68,7 @@ const ProductDetails = ({ route: { params } }) => {
       }}
     >
       <Header back={true} />
-      {/* Carousel */}
+      {/* carousel */}
       <Carousel
         layout="stack"
         sliderWidth={SLIDER_WIDTH}
@@ -50,6 +77,79 @@ const ProductDetails = ({ route: { params } }) => {
         data={images}
         renderItem={CarouselCardItem}
       />
+
+      <View
+        style={{
+          backgroundColor: colors.color2,
+          padding: 35,
+          flex: 1,
+          marginTop: -380,
+        }}
+      >
+        <Text
+          numberOfLines={2}
+          style={{
+            fontSize: 25,
+          }}
+        >
+          {name}
+        </Text>
+
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "900",
+          }}
+        >
+          ₱{price}
+        </Text>
+
+        <Text
+          style={{
+            letterSpacing: 1,
+            lineHeight: 20,
+            marginVertical: 15,
+          }}
+          numberOfLines={8}
+        >
+          {description}
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 5,
+          }}
+        >
+          <Text
+            style={{
+              color: colors.color3,
+              fontWeight: "100",
+            }}
+          >
+            Quantity
+          </Text>
+          <View
+            style={{
+              width: 80,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <TouchableOpacity onPress={decrementQty}>
+              <Avatar.Icon icon={"minus"} {...iconOptions} />
+            </TouchableOpacity>
+
+            <Text style={style.quantity}>{quantity}</Text>
+
+            <TouchableOpacity onPress={incrementQty}>
+              <Avatar.Icon icon={"plus"} {...iconOptions} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
