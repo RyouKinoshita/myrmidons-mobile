@@ -13,10 +13,10 @@ const schema = new mongoose.Schema({
     type: Number,
     required: [true, "Please Enter Price"],
   },
-  stock: {
-    type: Number,
-    required: [true, "Please Enter Stock"],
-  },
+  // ratings: {
+  //   type: Number,
+  //   default: 0,
+  // },
 
   images: [{ public_id: String, url: String }],
 
