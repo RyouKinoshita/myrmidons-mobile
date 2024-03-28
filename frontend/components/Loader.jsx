@@ -11,7 +11,7 @@ const Loader = () => {
         alignSelf: "center",
       }}
       size={100}
-      color={colors.color3}
+      color={colors.color1}
     />
   );
 };

@@ -80,12 +80,12 @@ const Profile = ({ navigation }) => {
 
             <View style={styles.avatarContainer}>
               <Avatar.Image
-                // source={require('../assets/defaultAvatar.png')}
+                source={require('../assets/me.jpg')}
                 size={100}
                 style={styles.avatar}
               />
               <TouchableOpacity onPress={() => navigation.navigate("camera", { updateProfile: true })}>
-                <Button mode="contained" color={colors.color1} style={styles.changePhotoButton}>Change Photo</Button>
+                <Button mode="contained"  style={styles.changePhotoButton}>Change Photo</Button>
               </TouchableOpacity>
             </View>
 
@@ -96,7 +96,7 @@ const Profile = ({ navigation }) => {
               <ButtonBox handler={navigateHandler} text={"Orders"} icon={"format-list-bulleted-square"} />
               <ButtonBox handler={navigateHandler} icon={"view-dashboard"} text={"Admin"} reverse={true} />
               <ButtonBox handler={navigateHandler} text={"Profile"} icon={"pencil"} />
-              <ButtonBox handler={navigateHandler} text={"Password"} icon={"pencil"} />
+              <ButtonBox handler={navigateHandler} text={"Password"} icon={"lock"} />
             </View>
 
             <View style={styles.transactionHistoryContainer}>
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
   changePhotoButton: {
     marginTop: 10,
     width: 150,
+   
   },
   name: {
     fontSize: 20,
