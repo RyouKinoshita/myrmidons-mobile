@@ -20,6 +20,7 @@ const UpdateProfile = ({ navigation }) => {
 //   const loading = useMessageAndErrorOther(dispatch, navigation, "profile");
 const loading = false
   const submitHandler = () => {
+    alert("Update Success")
     dispatch(updateProfile(name, email));
   };
   return (
