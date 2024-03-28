@@ -81,7 +81,7 @@ export const getMyProfile = asyncError(async (req, res, next) => {
 export const updateProfile = asyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
-  const { name, email, address, city, country, pinCode } = req.body;
+  const { name, email } = req.body;
 
   if (name) user.name = name;
   if (email) user.email = email;
