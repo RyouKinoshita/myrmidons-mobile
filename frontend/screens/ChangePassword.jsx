@@ -20,6 +20,7 @@ const ChangePassword = ({ navigation }) => {
 //   const loading = useMessageAndErrorOther(dispatch, navigation, "profile");
 const loading = false
 const submitHandler = () => {
+    alert("Change Success")
     dispatch(updatePassword(oldPassword, newPassword));
     setOldPassword("");
     setNewPassword("");
