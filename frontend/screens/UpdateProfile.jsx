@@ -1,12 +1,6 @@
 import { View, Text, ScrollView } from "react-native";
 import React, { useState } from "react";
-import {
-  colors,
-  defaultStyle,
-  formHeading,
-  inputOptions,
-  formStyles as styles,
-} from "../styles/styles";
+import { colors, defaultStyle, formHeading, inputOptions, formStyles as styles} from "../styles/styles";
 import { Button, TextInput } from "react-native-paper";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -19,10 +13,7 @@ const UpdateProfile = ({ navigation }) => {
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-//   const [address, setAddress] = useState(user?.address);
-//   const [city, setCity] = useState(user?.city);
-//   const [country, setCountry] = useState(user?.country);
-//   const [pinCode, setPinCode] = useState(user?.pinCode.toString());
+
 
 //   const dispatch = useDispatch();
 
