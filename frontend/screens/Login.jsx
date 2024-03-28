@@ -8,9 +8,11 @@ const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const loading = false
     const submitHandler = () => {
         alert("YAHOO");
     };
+
 
     return (
         <>
@@ -26,7 +28,7 @@ const Login = ({ navigation }) => {
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 style={styles.input}
-                left={<TextInput.Icon name="email" color="black" />}
+                // left={<TextInput.Icon name="email" color="black" />}
             />
             <TextInput
                 label="Password"
@@ -34,7 +36,7 @@ const Login = ({ navigation }) => {
                 onChangeText={setPassword}
                 secureTextEntry
                 style={styles.input}
-                left={<TextInput.Icon name="lock" color="black" />}
+                // left={<TextInput.Icon name="lock" color="black" />}
             />
             <TouchableOpacity onPress={() => navigation.navigate("forgetpassword")}>
                 <Text style={styles.forgot}>Forgot Password</Text>
@@ -42,14 +44,23 @@ const Login = ({ navigation }) => {
             <Button
                 mode="contained"
                 onPress={submitHandler}
+                loading={loading}
                 style={styles.loginButton}
+                disabled={email === "" || password === ""}
                 labelStyle={{ color: colors.color2 }}
             >
                 LOGIN
             </Button>
             <TouchableOpacity style={styles.signUp} onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.signUpText}>Don't have an account? Sign Up</Text>
-            </TouchableOpacity>
+            <Button
+                mode="text"
+                onPress={() => navigation.navigate('Register')}
+                labelStyle={{ color: colors.color3 }}
+            >
+                Don't have an account? Sign Up
+            </Button>
+        </TouchableOpacity>
+
 
         </ScrollView>
         <Footer/>

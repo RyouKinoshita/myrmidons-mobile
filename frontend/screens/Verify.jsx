@@ -4,14 +4,14 @@ import { TextInput, Button } from 'react-native-paper';
 import { colors } from '../styles/styles';
 import Footer from '../components/Footer';
 
-const ForgetPassword = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
+const Verify = ({ navigation }) => {
+    const [otp, setOtp] = useState('');
+    const [password, setPassword] = useState('');
 
     const loading = false
     const submitHandler = () => {
-        alert("OTP send to you Email");
-        navigation.navigate("verify")
+        alert("Reset Success");
+        navigation.navigate("login")
     };
 
     return (
@@ -23,32 +23,38 @@ const ForgetPassword = ({ navigation }) => {
                 resizeMode="contain"
             />
             <TextInput
-                label="Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
+                label="OTP"
+                value={otp}
+                onChangeText={setOtp}
+                keyboardType="number-pad"
+                style={styles.input}
+            
+            />
+            <TextInput
+                label="New Password"
+                value={password}
+                onChangeText={setPassword}
                 style={styles.input}
                
             />
-
             <Button
                 mode="contained"
                 onPress={submitHandler}
+                disabled={otp === "" || password === ""}
                 style={styles.loginButton}
                 labelStyle={{ color: colors.color2 }}
             >
-                Send OTP
+                Reset
+            </Button> 
+        
+            <Button
+                mode="text"
+                onPress= {() => navigation.navigate("forgetpassword")}
+                labelStyle={{ color: colors.color3 }}
+                style={{ alignSelf: 'center', marginTop: 20 }}
+            >
+                Resend OTP
             </Button>
-            <TouchableOpacity style={styles.signUp} onPress={() => navigation.navigate('Register')}>
-                <Button
-                    mode="text"
-                    onPress={() => navigation.navigate('Register')}
-                    labelStyle={{ color: colors.color3 }}
-                >
-                    Don't have an account? Sign Up
-                </Button>
-            </TouchableOpacity>
-
 
         </ScrollView>
         <Footer/>
@@ -94,4 +100,5 @@ const styles = StyleSheet.create({
 
 
 
-export default ForgetPassword
+
+export default Verify
