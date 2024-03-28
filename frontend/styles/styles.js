@@ -82,5 +82,52 @@ export const formStyles = StyleSheet.create({
   },
 });
 
+export const styles = StyleSheet.create({
+  container: {
+      flexGrow: 1,
+      backgroundColor: colors.color1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 20,
+  },
+  formContainer: {
+      width: '80%',
+      alignItems: 'center',
+  },
+  avatar: {
+      alignSelf: 'center',
+      backgroundColor: colors.color2,
+      marginBottom: 20,
+  },
+  input: {
+      marginBottom: 10,
+      width: '100%',
+      backgroundColor: colors.color2,
+  },
+  signUpButton: {
+      marginTop: 20,
+      backgroundColor: colors.color3,
+      width: '100%',
+  },
+  signInLink: {
+      marginTop: 20,
+  },
+  signInText: {
+      color: colors.color3,
+      textDecorationLine: 'underline',
+  },
+  logo: {
+      height: 150,
+      width: '80%',
+      marginBottom: 20,
+  },
+  changePhotoButton: {
+      marginTop: 10,
+      color: colors.color3,
+  },
+});
+
+
+
 export const defaultImg =
   "https://p.kindpng.com/picc/s/451-4517876_default-profile-hd-png-download.png";
