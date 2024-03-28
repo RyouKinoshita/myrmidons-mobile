@@ -12,7 +12,8 @@ const Login = ({ navigation }) => {
     const submitHandler = () => {
         alert("YAHOO");
     };
-
+//     const disableBtn =
+//    !email || !password ;
 
     return (
         <>
@@ -54,7 +55,7 @@ const Login = ({ navigation }) => {
             <TouchableOpacity style={styles.signUp} onPress={() => navigation.navigate('Register')}>
             <Button
                 mode="text"
-                onPress={() => navigation.navigate('Register')}
+                onPress={() => navigation.navigate('signup')}
                 labelStyle={{ color: colors.color3 }}
             >
                 Don't have an account? Sign Up

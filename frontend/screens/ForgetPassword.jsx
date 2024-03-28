@@ -39,10 +39,10 @@ const ForgetPassword = ({ navigation }) => {
             >
                 Send OTP
             </Button>
-            <TouchableOpacity style={styles.signUp} onPress={() => navigation.navigate('Register')}>
+            <TouchableOpacity style={styles.signUp} onPress={() => navigation.navigate('signup')}>
                 <Button
                     mode="text"
-                    onPress={() => navigation.navigate('Register')}
+                    onPress={() => navigation.navigate('signup')}
                     labelStyle={{ color: colors.color3 }}
                 >
                     Don't have an account? Sign Up

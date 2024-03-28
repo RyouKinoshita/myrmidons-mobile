@@ -8,6 +8,7 @@ import CartItem from "../components/CartItem";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import Footer from "../components/Footer";
 
 const Cart = () => {
   const navigate = useNavigation();
@@ -69,6 +70,8 @@ const Cart = () => {
     });
   };
   return (
+
+    <>
     <View
       style={{
         ...defaultStyle,
@@ -143,6 +146,8 @@ const Cart = () => {
         </Button>
       </TouchableOpacity>
     </View>
+    <Footer/>
+    </>
   );
 };
 
