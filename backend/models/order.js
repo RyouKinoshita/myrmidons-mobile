@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-  shippingInfo: {
+  eventInfo: {
     address: {
       type: String,
       required: true,
@@ -23,6 +23,10 @@ const schema = new mongoose.Schema({
   orderItems: [
     {
       name: {
+        type: String,
+        required: true,
+      },
+      date: {
         type: String,
         required: true,
       },
