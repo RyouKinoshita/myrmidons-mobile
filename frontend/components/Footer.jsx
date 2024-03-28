@@ -33,7 +33,7 @@ const Footer = ({ activeRoute = "home" }) => {
     color: colors.color2,
     size: 30,
     style: {
-      backgroundColor: colors.color3,
+      backgroundColor: colors.color1,
     },
   };
 
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: colors.color1,
+    backgroundColor: colors.color3,
     borderTopWidth: 2,
     borderTopColor: colors.color3,
     paddingVertical: 10,

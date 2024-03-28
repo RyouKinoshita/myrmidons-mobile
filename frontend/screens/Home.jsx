@@ -109,8 +109,10 @@ const Home = () => {
         >
           {/* heading */}
           <View>
-            <Text style={{ fontSize: 25 }}>Our</Text>
-            <Text style={{ fontSize: 25, fontWeight: "900" }}>Services</Text>
+            <Text style={{ fontSize: 25 }}>
+              Our{" "}
+              <Text style={{ fontSize: 25, fontWeight: "900" }}>Products</Text>
+            </Text>
           </View>
 
           {/* search bar */}
@@ -148,7 +150,7 @@ const Home = () => {
                   backgroundColor:
                     category === item._id ? colors.color1 : colors.color5,
                   borderRadius: 100,
-                  margin: 5,
+                  margin: 3,
                 }}
                 onPress={() => categoryButtonHandler(item._id)}
               >
