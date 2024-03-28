@@ -4,7 +4,7 @@ import { colors } from "../styles/styles";
 import { Avatar } from "react-native-paper";
 import { iconOptions } from "../screens/ProductDetails";
 
-const CartItem = ({
+export const CartItem = ({
   name,
   amount,
   qty,
