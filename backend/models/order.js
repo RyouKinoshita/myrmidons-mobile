@@ -42,9 +42,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      product: {
+      service: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
+        ref: "service",
         required: true,
       },
     },

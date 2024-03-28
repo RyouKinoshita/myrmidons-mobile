@@ -1,14 +1,14 @@
 import { asyncError } from "../middlewares/error.js";
-import { Product } from "../models/product.js";
+import { Service } from "../models/service.js";
 import ErrorHandler from "../utils/error.js";
 import { getDataUri } from "../utils/features.js";
 import cloudinary from "cloudinary";
 import { Category } from "../models/category.js";
 
-export const getAllProducts = asyncError(async (req, res, next) => {
+export const getAllServices = asyncError(async (req, res, next) => {
   const { keyword, category } = req.query;
 
-  const products = await Product.find({
+  const services = await Service.find({
     name: {
       $regex: keyword ? keyword : "",
       $options: "i",
@@ -18,34 +18,34 @@ export const getAllProducts = asyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    products,
+    services,
   });
 });
-export const getAdminProducts = asyncError(async (req, res, next) => {
-  const products = await Product.find({}).populate("category");
+export const getAdminServices = asyncError(async (req, res, next) => {
+  const services = await Service.find({}).populate("category");
 
-  // const outOfStock = products.filter((i) => i.stock === 0);
+  // const outOfStock = services.filter((i) => i.stock === 0);
 
   res.status(200).json({
     success: true,
-    products,
+    services,
     // outOfStock: outOfStock.length,
-    // inStock: products.length - outOfStock.length,
+    // inStock: services.length - outOfStock.length,
   });
 });
 
-export const getProductDetails = asyncError(async (req, res, next) => {
-  const product = await Product.findById(req.params.id).populate("category");
+export const getServiceDetails = asyncError(async (req, res, next) => {
+  const service = await Service.findById(req.params.id).populate("category");
 
-  if (!product) return next(new ErrorHandler("Product not found", 404));
+  if (!service) return next(new ErrorHandler("Service not found", 404));
 
   res.status(200).json({
     success: true,
-    product,
+    service,
   });
 });
 
-export const createProduct = asyncError(async (req, res, next) => {
+export const createService = asyncError(async (req, res, next) => {
   const { name, description, category, price } = req.body;
 
   if (!req.file) return next(new ErrorHandler("Please add image", 400));
@@ -57,7 +57,7 @@ export const createProduct = asyncError(async (req, res, next) => {
     url: myCloud.secure_url,
   };
 
-  await Product.create({
+  await Service.create({
     name,
     description,
     category,
@@ -67,33 +67,33 @@ export const createProduct = asyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Product Created Successfully",
+    message: "Service Created Successfully",
   });
 });
 
-export const updateProduct = asyncError(async (req, res, next) => {
+export const updateService = asyncError(async (req, res, next) => {
   const { name, description, category, price } = req.body;
 
-  const product = await Product.findById(req.params.id);
-  if (!product) return next(new ErrorHandler("Product not found", 404));
+  const service = await Service.findById(req.params.id);
+  if (!service) return next(new ErrorHandler("Service not found", 404));
 
-  if (name) product.name = name;
-  if (description) product.description = description;
-  if (category) product.category = category;
-  if (price) product.price = price;
-  // if (stock) product.stock = stock;
+  if (name) service.name = name;
+  if (description) service.description = description;
+  if (category) service.category = category;
+  if (price) service.price = price;
+  // if (stock) service.stock = stock;
 
-  await product.save();
+  await service.save();
 
   res.status(200).json({
     success: true,
-    message: "Product Updated Successfully",
+    message: "Service Updated Successfully",
   });
 });
 
-export const addProductImage = asyncError(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
-  if (!product) return next(new ErrorHandler("Product not found", 404));
+export const addServiceImage = asyncError(async (req, res, next) => {
+  const service = await Service.findById(req.params.id);
+  if (!service) return next(new ErrorHandler("Service not found", 404));
 
   if (!req.file) return next(new ErrorHandler("Please add image", 400));
 
@@ -104,8 +104,8 @@ export const addProductImage = asyncError(async (req, res, next) => {
     url: myCloud.secure_url,
   };
 
-  product.images.push(image);
-  await product.save();
+  service.images.push(image);
+  await service.save();
 
   res.status(200).json({
     success: true,
@@ -113,9 +113,9 @@ export const addProductImage = asyncError(async (req, res, next) => {
   });
 });
 
-export const deleteProductImage = asyncError(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
-  if (!product) return next(new ErrorHandler("Product not found", 404));
+export const deleteServiceImage = asyncError(async (req, res, next) => {
+  const service = await Service.findById(req.params.id);
+  if (!service) return next(new ErrorHandler("Service not found", 404));
 
   const id = req.query.id;
 
@@ -123,17 +123,17 @@ export const deleteProductImage = asyncError(async (req, res, next) => {
 
   let isExist = -1;
 
-  product.images.forEach((item, index) => {
+  service.images.forEach((item, index) => {
     if (item._id.toString() === id.toString()) isExist = index;
   });
 
   if (isExist < 0) return next(new ErrorHandler("Image doesn't exist", 400));
 
-  await cloudinary.v2.uploader.destroy(product.images[isExist].public_id);
+  await cloudinary.v2.uploader.destroy(service.images[isExist].public_id);
 
-  product.images.splice(isExist, 1);
+  service.images.splice(isExist, 1);
 
-  await product.save();
+  await service.save();
 
   res.status(200).json({
     success: true,
@@ -141,17 +141,17 @@ export const deleteProductImage = asyncError(async (req, res, next) => {
   });
 });
 
-export const deleteProduct = asyncError(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
-  if (!product) return next(new ErrorHandler("Product not found", 404));
+export const deleteService = asyncError(async (req, res, next) => {
+  const service = await Service.findById(req.params.id);
+  if (!service) return next(new ErrorHandler("Service not found", 404));
 
-  for (let index = 0; index < product.images.length; index++) {
-    await cloudinary.v2.uploader.destroy(product.images[index].public_id);
+  for (let index = 0; index < service.images.length; index++) {
+    await cloudinary.v2.uploader.destroy(service.images[index].public_id);
   }
-  await product.remove();
+  await service.remove();
   res.status(200).json({
     success: true,
-    message: "Product Deleted Successfully",
+    message: "Service Deleted Successfully",
   });
 });
 
@@ -176,12 +176,12 @@ export const getAllCategories = asyncError(async (req, res, next) => {
 export const deleteCategory = asyncError(async (req, res, next) => {
   const category = await Category.findById(req.params.id);
   if (!category) return next(new ErrorHandler("Category Not Found", 404));
-  const products = await Product.find({ category: category._id });
+  const services = await Service.find({ category: category._id });
 
-  for (let i = 0; i < products.length; i++) {
-    const product = products[i];
-    product.category = undefined;
-    await product.save();
+  for (let i = 0; i < services.length; i++) {
+    const service = services[i];
+    service.category = undefined;
+    await service.save();
   }
 
   await category.remove();
