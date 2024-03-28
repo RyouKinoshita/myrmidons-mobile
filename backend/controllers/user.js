@@ -14,18 +14,18 @@ export const login = asyncError(async (req, res, next) => {
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
-    return next(new ErrorHandler("Incorrect Email or Password", 400));
+    return next(new ErrorHandler("Incorrect email or password", 400));
   }
 
-  if (!password) return next(new ErrorHandler("Please Enter Password", 400));
+  if (!password) return next(new ErrorHandler("Please enter password", 400));
 
   // Handle error
   const isMatched = await user.comparePassword(password);
 
   if (!isMatched) {
-    return next(new ErrorHandler("Incorrect Email or Password", 400));
+    return next(new ErrorHandler("Incorrect email or password", 400));
   }
-  sendToken(user, res, `Welcome Back, ${user.name}`, 200);
+  sendToken(user, res, `Welcome back, ${user.name}`, 200);
 });
 
 export const signup = asyncError(async (req, res, next) => {
@@ -33,7 +33,7 @@ export const signup = asyncError(async (req, res, next) => {
 
   let user = await User.findOne({ email });
 
-  if (user) return next(new ErrorHandler("User Already Exist", 400));
+  if (user) return next(new ErrorHandler("User already exist", 400));
 
   let avatar = undefined;
 
@@ -53,7 +53,7 @@ export const signup = asyncError(async (req, res, next) => {
     password,
   });
 
-  sendToken(user, res, `Registered Successfully`, 201);
+  sendToken(user, res, `Registered successfully`, 201);
 });
 
 export const logOut = asyncError(async (req, res, next) => {
@@ -65,7 +65,7 @@ export const logOut = asyncError(async (req, res, next) => {
     })
     .json({
       success: true,
-      message: "Logged Out Successfully",
+      message: "Logged out successfully",
     });
 });
 
@@ -90,7 +90,7 @@ export const updateProfile = asyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Profile Updated Successfully",
+    message: "Profile updated successfully",
   });
 });
 
@@ -101,19 +101,19 @@ export const changePassword = asyncError(async (req, res, next) => {
 
   if (!oldPassword || !newPassword)
     return next(
-      new ErrorHandler("Please Enter Old Password & New Password", 400)
+      new ErrorHandler("Please enter old password & new password", 400)
     );
 
   const isMatched = await user.comparePassword(oldPassword);
 
-  if (!isMatched) return next(new ErrorHandler("Incorrect Old Password", 400));
+  if (!isMatched) return next(new ErrorHandler("Incorrect old password", 400));
 
   user.password = newPassword;
   await user.save();
 
   res.status(200).json({
     success: true,
-    message: "Password Changed Successully",
+    message: "Password changed successfully",
   });
 });
 
@@ -134,7 +134,7 @@ export const updatePic = asyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Avatar Updated Successfully",
+    message: "Avatar updated Successfully",
   });
 });
 
@@ -154,9 +154,9 @@ export const forgetpassword = asyncError(async (req, res, next) => {
   user.otp_expire = new Date(Date.now() + otp_expire);
   await user.save();
 
-  const message = `Your OTP for Reseting Password is ${otp}.\n Please ignore if you haven't requested this.`;
+  const message = `Your OTP for reseting password is ${otp}.\n Please ignore if you haven't requested this.`;
   try {
-    await sendEmail("OTP For Reseting Password", user.email, message);
+    await sendEmail("OTP for reseting password", user.email, message);
   } catch (error) {
     user.otp = null;
     user.otp_expire = null;
@@ -181,10 +181,10 @@ export const resetpassword = asyncError(async (req, res, next) => {
   });
 
   if (!user)
-    return next(new ErrorHandler("Incorrect OTP or has been expired", 400));
+    return next(new ErrorHandler("Incorrect OTP or OTP has expired", 400));
 
   if (!password)
-    return next(new ErrorHandler("Please Enter New Password", 400));
+    return next(new ErrorHandler("Please enter new password", 400));
 
   user.password = password;
   user.otp = undefined;
@@ -194,6 +194,6 @@ export const resetpassword = asyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Password Changed Successfully, You can login now",
+    message: "Password changed successfully, login with your new password",
   });
 });
