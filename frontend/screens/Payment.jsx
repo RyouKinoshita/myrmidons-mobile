@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useStripe } from "@stripe/stripe-react-native";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import axios from "axios";
-import { server } from "../redux/store";
+// import { server } from "../redux/store";
 import Loader from "../components/Loader";
 
 const Payment = ({ navigation, route }) => {
