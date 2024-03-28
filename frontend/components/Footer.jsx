@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../styles/styles";
@@ -31,64 +31,69 @@ const Footer = ({ activeRoute = "home" }) => {
 
   const avatarOptions = {
     color: colors.color2,
-    size: 50,
+    size: 30,
     style: {
       backgroundColor: colors.color3,
     },
   };
+
   return (
-    <View
-      style={{
-        backgroundColor: colors.color3,
-        position: "absolute",
-        width: "100%",
-        bottom: 0,
-      }}
-    >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-        }}
+    <View style={styles.footer}>
+      <TouchableOpacity
+        style={styles.icon}
+        activeOpacity={0.8}
+        onPress={() => navigationHandler(1)}
       >
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => navigationHandler(1)}
-        >
-          <Avatar.Icon
-            {...avatarOptions}
-            icon={activeRoute === "cart" ? "shopping" : "shopping-outline"}
-          />
-        </TouchableOpacity>
+        <Avatar.Icon
+          {...avatarOptions}
+          icon={activeRoute === "cart" ? "shopping" : "shopping-outline"}
+        />
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => navigationHandler(0)}
-        >
-          <Avatar.Icon
-            {...avatarOptions}
-            icon={activeRoute === "home" ? "home" : "home-outline"}
-          />
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.icon}
+        activeOpacity={0.8}
+        onPress={() => navigationHandler(0)}
+      >
+        <Avatar.Icon
+          {...avatarOptions}
+          icon={activeRoute === "home" ? "home" : "home-outline"}
+        />
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => navigationHandler(2)}
-        >
-          <Avatar.Icon
-            {...avatarOptions}
-            icon={
-              isAuthenticated === false
-                ? "login"
-                : activeRoute === "profile"
-                ? "account"
-                : "account-outline"
-            }
-          />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={styles.icon}
+        activeOpacity={0.8}
+        onPress={() => navigationHandler(2)}
+      >
+        <Avatar.Icon
+          {...avatarOptions}
+          icon={
+            isAuthenticated === false
+              ? "login"
+              : activeRoute === "profile"
+              ? "account"
+              : "account-outline"
+          }
+        />
+      </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: colors.color1,
+    borderTopWidth: 2,
+    borderTopColor: colors.color3,
+    paddingVertical: 10,
+  },
+  icon: {
+    paddingHorizontal: 20,
+  },
+});
 
 export default Footer;
