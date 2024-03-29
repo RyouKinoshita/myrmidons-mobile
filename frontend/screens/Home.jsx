@@ -111,7 +111,7 @@ const Home = () => {
           <View>
             <Text style={{ fontSize: 25 }}>
               Our{" "}
-              <Text style={{ fontSize: 25, fontWeight: "900" }}>Products</Text>
+              <Text style={{ fontSize: 25, fontWeight: "900" }}>Services</Text>
             </Text>
           </View>
 
@@ -122,7 +122,7 @@ const Home = () => {
                 icon={"magnify"}
                 size={50}
                 color={"gray"}
-                style={{ backgroundColor: colors.color2, elevation: 12 }}
+                style={{ backgroundColor: colors.color1, elevation: 12 }}
               />
             </TouchableOpacity>
           </View>

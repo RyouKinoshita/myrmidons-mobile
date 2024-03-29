@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.color3,
     borderTopWidth: 2,
-    borderTopColor: colors.color3,
+    borderTopColor: colors.color1,
     paddingVertical: 10,
   },
   icon: {

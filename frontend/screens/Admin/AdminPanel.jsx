@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: colors.color2,
+    marginTop: 40
   },
   content: {
     flex: 1,

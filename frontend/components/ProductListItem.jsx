@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { colors } from "../styles/styles";
 import MyModal from "../components/MyModal";
 
@@ -20,65 +20,31 @@ const ProductListItem = ({
     <>
       <TouchableOpacity
         activeOpacity={0.9}
-        onLongPress={() => setOpenModal((prev) => !prev)}
+        onLongPress={() => setOpenModal(true)}
         onPress={() => navigate.navigate("productdetails", { id })}
       >
         <View
           style={{
             ...styles.container,
-            backgroundColor: i % 2 === 0 ? colors.color1 : colors.color3,
+            backgroundColor: i % 2 === 0 ? colors.color1 : colors.color1,
           }}
         >
           <Image
             source={{
               uri: imgSrc,
             }}
-            style={{
-              width: 40,
-              height: 40,
-              resizeMode: "contain",
-            }}
+            style={styles.image}
           />
 
-          <Text
-            style={{
-              width: 60,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
-            p{price}
-          </Text>
+          <Text style={styles.text}>{price}</Text>
 
-          <Text
-            style={{
-              maxWidth: 120,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
+          <Text numberOfLines={1} style={styles.text}>
             {name}
           </Text>
 
-          <Text
-            style={{
-              width: 60,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
-            {category}
-          </Text>
+          <Text style={styles.text}>{category}</Text>
 
-          <Text
-            style={{
-              width: 40,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
-            {stock}
-          </Text>
+          <Text style={styles.text}>{stock}</Text>
         </View>
       </TouchableOpacity>
 
@@ -103,6 +69,18 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginVertical: 10,
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 20, // half of width and height to create a circle
+    resizeMode: "cover",
+  },
+  text: {
+    flex: 1,
+    color: colors.color3,
+    marginLeft: 10,
+    marginRight: 10,
   },
 });
 
