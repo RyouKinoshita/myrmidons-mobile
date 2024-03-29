@@ -29,12 +29,13 @@ const Header = ({ back, emptyCart = false }) => {
         >
           <Avatar.Icon
             style={{
-              backgroundColor: colors.color4,
+              backgroundColor: colors.color1,
             }}
             icon={"arrow-left"}
             color={
               route.name === "productdetails" ? colors.color2 : colors.color3
             }
+            size={40} // Set the size of the icon
           />
         </TouchableOpacity>
       )}
@@ -50,12 +51,13 @@ const Header = ({ back, emptyCart = false }) => {
       >
         <Avatar.Icon
           style={{
-            backgroundColor: colors.color4,
+            backgroundColor: colors.color1,
           }}
           icon={emptyCart ? "delete-outline" : "cart-outline"}
           color={
             route.name === "productdetails" ? colors.color2 : colors.color3
           }
+          size={40} // Set the size of the icon
         />
       </TouchableOpacity>
     </>
