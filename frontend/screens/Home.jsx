@@ -17,7 +17,7 @@ export const products = [
   {
     price: 12345,
     stock: 5,
-    name: "product1",
+    name: "Service 1",
     _id: "prod1",
     images: [
       {
@@ -28,7 +28,29 @@ export const products = [
   {
     price: 54321,
     stock: 2,
-    name: "product2",
+    name: "Service 2",
+    _id: "prod2",
+    images: [
+      {
+        url: "https://picsum.photos/id/45/400/300",
+      },
+    ],
+  },
+  {
+    price: 54321,
+    stock: 2,
+    name: "Service 3",
+    _id: "prod2",
+    images: [
+      {
+        url: "https://picsum.photos/id/45/400/300",
+      },
+    ],
+  },
+  {
+    price: 54321,
+    stock: 2,
+    name: "Service 4",
     _id: "prod2",
     images: [
       {
@@ -110,8 +132,8 @@ const Home = () => {
           {/* heading */}
           <View>
             <Text style={{ fontSize: 25 }}>
-              Our{" "}
-              <Text style={{ fontSize: 25, fontWeight: "900" }}>Services</Text>
+              Our
+              <Text style={{ fontSize: 25, fontWeight: "900" }}> Services</Text>
             </Text>
           </View>
 

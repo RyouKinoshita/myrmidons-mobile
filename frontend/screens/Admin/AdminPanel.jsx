@@ -17,7 +17,25 @@ const deleteProductHandler = (id) => {
 };
 
 const AdminPanel = ({ navigation }) => {
-  const navigationHandler = () => {};
+
+    
+    const navigationHandler = (text) => {
+        switch (text) {
+          case "Category":
+            navigation.navigate("categories");
+            break;
+          case "All Orders":
+            navigation.navigate("adminorders");
+            break;
+          case "Product":
+            navigation.navigate("newproduct");
+            break;
+    
+          default:
+            navigation.navigate("adminorders");
+            break;
+        }
+      };
 
   const loading = false;
 

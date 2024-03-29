@@ -30,7 +30,8 @@ const transactions = [
         />
       ))}
     </View>
-  );  
+  );
+    
 const user = {
   name: "John Radilh Mancao",
   email: "johnradilh.mancao@gmail.com",
