@@ -9,6 +9,8 @@ import ProductListHeading from '../../components/ProductListHeading';
 import { products } from '../Home';
 import ProductListItem from '../../components/ProductListItem';
 import Footer from '../../components/Footer';
+import Chart from '../Chart';
+
 
 const deleteProductHandler = (id) => {
   console.log(`Deleting Product with ID: ${id}`);
@@ -24,12 +26,23 @@ const AdminPanel = ({ navigation }) => {
     <View style={styles.container}>
       <Header back={true} />
       <View style={styles.headingContainer}>
-        <Text style={styles.heading}>AdminPanel</Text>
+        <Text style={styles.heading}>Admin Panel</Text>
       </View>
       {loading ? (
         <Loader />
       ) : (
         <>
+
+        <View
+            style={{
+              backgroundColor: colors.color3,
+              borderRadius: 20,
+              alignItems: "center",
+            }}
+          >
+            <Chart inStock={12} outOfStock={2} />
+          </View>
+      
           <View style={styles.content}>
             <View style={styles.buttonRow}>
               <ButtonBox
