@@ -1,18 +1,105 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { defaultStyle, formHeading } from '../../styles/styles'
-import Header from '../../components/Header'
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Avatar, Button } from 'react-native-paper';
+import { colors, formHeading } from '../../styles/styles';
+import Header from '../../components/Header';
+import Loader from '../../components/Loader';
+import ButtonBox from '../../components/ButtonBox';
+import ProductListHeading from '../../components/ProductListHeading';
+import { products } from '../Home';
+import ProductListItem from '../../components/ProductListItem';
+import Footer from '../../components/Footer';
 
-const AdminPanel = () => {
+const deleteProductHandler = (id) => {
+  console.log(`Deleting Product with ID: ${id}`);
+};
+
+const AdminPanel = ({ navigation }) => {
+  const navigationHandler = () => {};
+
+  const loading = false;
+
   return (
-    <View style={defaultStyle}>
-        <Header back={true}/>
-        <View style={{paddingTop: 70, marginBottom: 20}}>
-            <Text style={formHeading}>AdminPanel</Text>
-        </View>
-      
+    <>
+    <View style={styles.container}>
+      <Header back={true} />
+      <View style={styles.headingContainer}>
+        <Text style={styles.heading}>AdminPanel</Text>
+      </View>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <View style={styles.content}>
+            <View style={styles.buttonRow}>
+              <ButtonBox
+                icon={'plus'}
+                text={'Product'}
+                handler={navigationHandler}
+              />
+              <ButtonBox
+                icon={'format-list-bulleted-square'}
+                text={'All Orders'}
+                handler={navigationHandler}
+              />
+              <ButtonBox
+                icon={'plus'}
+                text={'Category'}
+                handler={navigationHandler}
+              />
+            </View>
+            <ProductListHeading />
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View>
+                {products.map((item, index) => (
+                  <ProductListItem
+                    key={item._id}
+                    id={item._id}
+                    i={index}
+                    price={item.price}
+                    stock={item.stock}
+                    name={item.name}
+                    category={item.category?.category}
+                    imgSrc={item.images[0].url}
+                    deleteHandler={deleteProductHandler}
+                    navigate={navigation}
+                  />
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+        </>
+      )}
     </View>
-  )
-}
+    <Footer />
+    </>
+  );
+};
 
-export default AdminPanel
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.color3,
+  },
+  headingContainer: {
+    paddingTop: 70,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: colors.color2,
+  },
+  content: {
+    flex: 1,
+    padding: 20,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    marginVertical: 10,
+    justifyContent: 'space-between',
+  },
+});
+
+export default AdminPanel;

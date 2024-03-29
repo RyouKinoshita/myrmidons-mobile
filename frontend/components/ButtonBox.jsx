@@ -22,7 +22,7 @@ const ButtonBox = ({ icon, text, handler, reverse = false, loading = false }) =>
       <Avatar.Icon
         size={50}
         color={colors.color2}
-        style={{ backgroundColor: reverse ? colors.color1 : colors.color1 }}
+        style={{ backgroundColor: reverse ? colors.color1 : colors.color3 }}
         icon={icon}
       />
       <Text

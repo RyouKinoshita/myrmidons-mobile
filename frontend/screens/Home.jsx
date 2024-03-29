@@ -13,7 +13,7 @@ const categories = [
   { category: "Graphics & Video Production", _id: "gvp" },
 ];
 
-const products = [
+export const products = [
   {
     price: 12345,
     stock: 5,
