@@ -60,16 +60,16 @@ const Profile = ({ navigation, route }) => {
   };
   const navigateHandler = (text) => {
     switch (text) {
-      case "Admin":
+      case "Admin Dashboard":
         navigation.navigate("adminpanel");
         break;
-      case "Orders":
+      case "View Orders":
         navigation.navigate("orders");
         break;
-      case "Profile":
+      case "Update Profile":
         navigation.navigate("updateprofile");
         break;
-      case "Password":
+      case "Update Password":
         navigation.navigate("changepassword");
         break;
       case "Sign Out":
@@ -152,25 +152,25 @@ const Profile = ({ navigation, route }) => {
             <View style={styles.buttonContainer}>
               <ButtonBox
                 handler={navigateHandler}
-                text={"Orders"}
+                text={"View Orders"}
                 icon={"format-list-bulleted-square"}
               />
               {user?.role === "admin" && (
                 <ButtonBox
                   handler={navigateHandler}
                   icon={"view-dashboard"}
-                  text={"Admin"}
+                  text={"Admin Dashboard"}
                   reverse={true}
                 />
               )}
               <ButtonBox
                 handler={navigateHandler}
-                text={"Profile"}
+                text={"Update Profile"}
                 icon={"pencil"}
               />
               <ButtonBox
                 handler={navigateHandler}
-                text={"Password"}
+                text={"Update Password"}
                 icon={"lock"}
               />
             </View>
