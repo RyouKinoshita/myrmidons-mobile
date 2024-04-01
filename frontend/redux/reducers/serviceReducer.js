@@ -23,8 +23,6 @@ export const serviceReducer = createReducer(
       .addCase("getAdminServicesSuccess", (state, action) => {
         state.loading = false;
         state.services = action.payload.services;
-        state.inStock = action.payload.inStock;
-        state.outOfStock = action.payload.outOfStock;
       })
       .addCase("getServiceDetailsSuccess", (state, action) => {
         state.loading = false;

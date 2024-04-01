@@ -8,59 +8,11 @@ import ProductCard from "../components/ProductCard";
 import PortfolioCard from "../components/PortfolioCard";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
-
-export const categories = [
-  { category: "Digital Marketing", _id: "digitalmarketing" },
-  { category: "Social Media Management", _id: "smm" },
-  { category: "Graphics & Video Production", _id: "gvp" },
-];
-
-export const products = [
-  {
-    price: 12345,
-    stock: 5,
-    name: "Service 1",
-    _id: "prod1",
-    images: [
-      {
-        url: "https://picsum.photos/id/7/400/300",
-      },
-    ],
-  },
-  {
-    price: 54321,
-    stock: 2,
-    name: "Service 2",
-    _id: "prod2",
-    images: [
-      {
-        url: "https://picsum.photos/id/45/400/300",
-      },
-    ],
-  },
-  {
-    price: 54321,
-    stock: 2,
-    name: "Service 3",
-    _id: "prod3",
-    images: [
-      {
-        url: "https://picsum.photos/id/45/400/300",
-      },
-    ],
-  },
-  {
-    price: 54321,
-    stock: 2,
-    name: "Service 4",
-    _id: "prod4",
-    images: [
-      {
-        url: "https://picsum.photos/id/45/400/300",
-      },
-    ],
-  },
-];
+import Heading from "../components/Heading";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllServices } from "../redux/actions/serviceAction";
+import { useSetCategories } from "../utils/hooks";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export const portfolios = [
   {
@@ -90,8 +42,13 @@ const Home = () => {
   const [category, setCategory] = useState("");
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [categories, setCategories] = useState([]);
 
   const navigate = useNavigation();
+  const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+
+  const { services } = useSelector((state) => state.service);
 
   const categoryButtonHandler = (id) => {
     setCategory(id);
@@ -105,7 +62,7 @@ const Home = () => {
     // dispatch({
     //   type: "addToCart",
     //   payload: {
-    //     product: id,
+    //     service: id,
     //     name,
     //     price,
     //     image,
@@ -120,18 +77,18 @@ const Home = () => {
     console.log("Add to cart", id);
   };
 
-  // const categories = [
-  //   "Digital Marketing",
-  //   "Social Media Management",
-  //   "Graphics & Video Production",
-  //   "Web Development",
-  //   "Customer Service & QA",
-  //   "Project Management",
-  //   "Photography",
-  //   "KOL",
-  //   "Studio Services",
-  //   "PC/Mobile Game Management",
-  // ];
+  useSetCategories(setCategories, isFocused);
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => {
+      dispatch(getAllServices(searchQuery, category));
+    }, 500);
+
+    return () => {
+      clearTimeout(timeOutId);
+    };
+  }, [dispatch, searchQuery, category, isFocused]);
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -140,7 +97,7 @@ const Home = () => {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             setActiveSearch={setActiveSearch}
-            products={products}
+            services={services}
           />
         )}
 
@@ -222,10 +179,10 @@ const Home = () => {
             </ScrollView>
           </View>
 
-          {/* Products */}
+          {/* Services */}
           <View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {products.map((item, index) => (
+              {services.map((item, index) => (
                 <ProductCard
                   stock={item.stock}
                   name={item.name}
