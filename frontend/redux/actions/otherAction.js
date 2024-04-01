@@ -34,42 +34,37 @@ export const updatePassword =
     }
   };
 
-export const updateProfile =
-  (name, email, address, city, country, pinCode) => async (dispatch) => {
-    try {
-      dispatch({
-        type: "updateProfileRequest",
-      });
+export const updateProfile = (name, email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "updateProfileRequest",
+    });
 
-      const { data } = await axios.put(
-        `${server}/user/updateprofile`,
-        {
-          name,
-          email,
-          address,
-          city,
-          country,
-          pinCode,
+    const { data } = await axios.put(
+      `${server}/user/updateprofile`,
+      {
+        name,
+        email,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+        withCredentials: true,
+      }
+    );
 
-      dispatch({
-        type: "updateProfileSuccess",
-        payload: data.message,
-      });
-    } catch (error) {
-      dispatch({
-        type: "updateProfileFail",
-        payload: error.response.data.message,
-      });
-    }
-  };
+    dispatch({
+      type: "updateProfileSuccess",
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: "updateProfileFail",
+      payload: error.response.data.message,
+    });
+  }
+};
 
 export const updatePic = (formData) => async (dispatch) => {
   try {
