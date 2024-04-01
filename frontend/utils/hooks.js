@@ -123,9 +123,7 @@ export const useGetOrders = (isFocused, isAdmin = false) => {
 };
 
 export const useAdminServices = (dispatch, isFocused) => {
-  const { services, inStock, outOfStock, error, loading } = useSelector(
-    (state) => state.service
-  );
+  const { services, error, loading } = useSelector((state) => state.service);
 
   useEffect(() => {
     if (error) {
@@ -143,8 +141,6 @@ export const useAdminServices = (dispatch, isFocused) => {
 
   return {
     services,
-    inStock,
-    outOfStock,
     loading,
   };
 };

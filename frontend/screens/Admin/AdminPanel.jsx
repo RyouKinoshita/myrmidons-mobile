@@ -16,12 +16,18 @@ import { services } from "../Home";
 import ServiceListItem from "../../components/ServiceListItem";
 import Footer from "../../components/Footer";
 import Chart from "../Chart";
-
-const deleteServiceHandler = (id) => {
-  console.log(`Deleting Service with ID: ${id}`);
-};
+import { useAdminServices, useMessageAndErrorOther } from "../../utils/hooks";
+import { useDispatch } from "react-redux";
+import { useIsFocused } from "@react-navigation/native";
+import { deleteService } from "../../redux/actions/otherAction";
+import { getAdminServices } from "../../redux/actions/serviceAction";
 
 const AdminPanel = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+
+  const { loading, services } = useAdminServices(dispatch, isFocused);
+
   const navigationHandler = (text) => {
     switch (text) {
       case "Category":
@@ -40,7 +46,16 @@ const AdminPanel = ({ navigation }) => {
     }
   };
 
-  const loading = false;
+  const deleteServiceHandler = (id) => {
+    dispatch(deleteService(id));
+  };
+
+  const loadingDelete = useMessageAndErrorOther(
+    dispatch,
+    null,
+    null,
+    getAdminServices
+  );
 
   return (
     <>
@@ -83,22 +98,23 @@ const AdminPanel = ({ navigation }) => {
               </View>
               <ServiceListHeading />
               <ScrollView showsVerticalScrollIndicator={false}>
-                {/* <View>
-                  {services.map((item, index) => (
-                    <ServiceListItem
-                      key={item._id}
-                      id={item._id}
-                      i={index}
-                      price={item.price}
-                      stock={item.stock}
-                      name={item.name}
-                      category={item.category?.category}
-                      imgSrc={item.images[0].url}
-                      deleteHandler={deleteServiceHandler}
-                      navigate={navigation}
-                    />
-                  ))}
-                </View> */}
+                <View>
+                  {!loadingDelete &&
+                    services.map((item, index) => (
+                      <ServiceListItem
+                        key={item._id}
+                        id={item._id}
+                        i={index}
+                        price={item.price}
+                        description={item.description}
+                        name={item.name}
+                        category={item.category?.category}
+                        imgSrc={item.images[0].url}
+                        deleteHandler={deleteServiceHandler}
+                        navigate={navigation}
+                      />
+                    ))}
+                </View>
               </ScrollView>
             </View>
           </>

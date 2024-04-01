@@ -9,9 +9,9 @@ const ServiceListItem = ({
   i,
   id,
   price,
-  stock,
   name,
   category,
+  description,
   imgSrc,
 }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -44,7 +44,7 @@ const ServiceListItem = ({
 
           <Text style={styles.text}>{category}</Text>
 
-          <Text style={styles.text}>{stock}</Text>
+          <Text style={styles.text}>{description}</Text>
         </View>
       </TouchableOpacity>
 

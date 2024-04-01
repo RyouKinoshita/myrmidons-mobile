@@ -9,7 +9,9 @@ const ServiceListHeading = () => {
       <Text style={styles.text}>Price</Text>
       <Text style={{ ...styles.text, width: null, maxWidth: 120 }}>Name</Text>
       <Text style={{ ...styles.text, width: 60 }}>Category</Text>
-      <Text style={styles.text}>Stock</Text>
+      <Text style={{ ...styles.text, width: null, maxWidth: 120 }}>
+        Description
+      </Text>
     </View>
   );
 };
