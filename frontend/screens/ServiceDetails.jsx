@@ -15,7 +15,7 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
 import Footer from "../components/Footer";
-// import { getProductDetails } from "../redux/actions/productAction";
+import { getServiceDetails } from "../redux/actions/serviceAction";
 
 const SLIDER_WIDTH = Dimensions.get("window").width;
 const ITEM_WIDTH = SLIDER_WIDTH;
@@ -29,49 +29,37 @@ export const iconOptions = {
   },
 };
 
-const images = [
-  {
-    id: "asfdasdf",
-    url: "https://picsum.photos/id/69/400/300",
-  },
-  {
-    id: "asdfasdf",
-    url: "https://picsum.photos/id/89/400/300",
-  },
-];
+const ServiceDetails = ({ route: { params } }) => {
+  const {
+    service: { name, price, description, images },
+  } = useSelector((state) => state.service);
 
-const ProductDetails = ({ route: { params } }) => {
-  const name = "Yes";
-  const price = 1234;
-  const description = "yesyesyes";
-  const stock = 20;
   const isCarousel = useRef(null);
   const [quantity, setQuantity] = useState(1);
-
-  const incrementQty = () => {
-    if (stock <= quantity)
-      return Toast.show({
-        type: "error",
-        text1: "Maximum Value Added",
-      });
-    setQuantity((prev) => prev + 1);
-  };
-  const decrementQty = () => {
-    if (quantity <= 1) return;
-    setQuantity((prev) => prev - 1);
-  };
+  const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
   const addToCardHandler = () => {
-    if (stock === 0)
-      return Toast.show({
-        type: "error",
-        text1: "Out Of Stock",
-      });
+    dispatch({
+      type: "addToCart",
+      payload: {
+        product: params.id,
+        name,
+        price,
+        image: images[0]?.url,
+        quantity,
+      },
+    });
     Toast.show({
       type: "success",
       text1: "Added To Cart",
     });
   };
+
+  useEffect(() => {
+    dispatch(getServiceDetails(params.id));
+  }, [dispatch, params.id, isFocused]);
+
   return (
     <>
       <View
@@ -128,41 +116,6 @@ const ProductDetails = ({ route: { params } }) => {
           >
             {description}
           </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingHorizontal: 5,
-            }}
-          >
-            <Text
-              style={{
-                color: colors.color3,
-                fontWeight: "100",
-              }}
-            >
-              Quantity
-            </Text>
-            <View
-              style={{
-                width: 80,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <TouchableOpacity onPress={decrementQty}>
-                <Avatar.Icon icon={"minus"} {...iconOptions} />
-              </TouchableOpacity>
-
-              <Text style={style.quantity}>{quantity}</Text>
-
-              <TouchableOpacity onPress={incrementQty}>
-                <Avatar.Icon icon={"plus"} {...iconOptions} />
-              </TouchableOpacity>
-            </View>
-          </View>
 
           <TouchableOpacity activeOpacity={0.9} onPress={addToCardHandler}>
             <Button icon={"cart"} style={style.btn} textColor={colors.color2}>
@@ -213,4 +166,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default ProductDetails;
+export default ServiceDetails;

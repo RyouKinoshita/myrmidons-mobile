@@ -4,7 +4,7 @@ import { defaultStyle, colors } from "../styles/styles";
 import { Avatar, Button } from "react-native-paper";
 import Header from "../components/Header";
 import SearchModal from "../components/SearchModal";
-import ProductCard from "../components/ProductCard";
+import ServiceCard from "../components/ServiceCard";
 import PortfolioCard from "../components/PortfolioCard";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
@@ -183,7 +183,7 @@ const Home = () => {
           <View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {services.map((item, index) => (
-                <ProductCard
+                <ServiceCard
                   stock={item.stock}
                   name={item.name}
                   price={item.price}

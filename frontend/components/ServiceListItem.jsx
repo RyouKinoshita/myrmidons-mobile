@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { colors } from "../styles/styles";
 import MyModal from "../components/MyModal";
 
-const ProductListItem = ({
+const ServiceListItem = ({
   navigate,
   deleteHandler,
   i,
@@ -21,7 +21,7 @@ const ProductListItem = ({
       <TouchableOpacity
         activeOpacity={0.9}
         onLongPress={() => setOpenModal(true)}
-        onPress={() => navigate.navigate("productdetails", { id })}
+        onPress={() => navigate.navigate("servicedetails", { id })}
       >
         <View
           style={{
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductListItem;
+export default ServiceListItem;

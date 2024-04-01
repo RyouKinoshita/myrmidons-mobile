@@ -3,8 +3,7 @@ import React from "react";
 import { colors } from "../styles/styles";
 import { Button } from "react-native-paper";
 
-const ProductCard = ({
-  stock,
+const ServiceCard = ({
   name,
   price,
   image,
@@ -16,7 +15,7 @@ const ProductCard = ({
   return (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => navigate.navigate("productdetails", { id })}
+      onPress={() => navigate.navigate("servicedetails", { id })}
     >
       <View
         style={{
@@ -87,7 +86,7 @@ const ProductCard = ({
           }}
         >
           <Button
-            onPress={() => addToCardHandler(id, name, price, image, stock)}
+            onPress={() => addToCardHandler(id, name, price, image)}
             textColor={i % 2 === 0 ? colors.color1 : colors.color2}
           >
             Add To Cart
@@ -98,4 +97,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default ServiceCard;

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { colors } from "../styles/styles";
 
-const ProductListHeading = () => {
+const ServiceListHeading = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Image</Text>
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductListHeading;
+export default ServiceListHeading;
