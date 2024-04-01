@@ -19,6 +19,7 @@ import AdminPanel from "./screens/Admin/AdminPanel";
 import Categories from "./screens/Admin/Categories";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./redux/actions/userActions";
+import Camera from "./screens/Camera";
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,7 @@ const Main = () => {
           <Stack.Screen name="updateprofile" component={UpdateProfile} />
           <Stack.Screen name="changepassword" component={ChangePassword} />
           <Stack.Screen name="orders" component={Order} />
+          <Stack.Screen name="camera" component={Camera} />
 
           {/* Password Resetting Routes */}
           <Stack.Screen name="forgetpassword" component={ForgetPassword} />
