@@ -64,6 +64,7 @@ const Main = () => {
           <Stack.Screen name="adminorders" component={AdminOrders} />
           <Stack.Screen name="updateservice" component={UpdateService} />
           <Stack.Screen name="newservice" component={NewService} />
+          <Stack.Screen name="productimages" component={ProductImages} />
         </Stack.Group>
       </Stack.Navigator>
 
