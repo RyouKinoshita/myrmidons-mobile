@@ -23,6 +23,7 @@ import Camera from "./screens/Camera";
 import AdminOrders from "./screens/Admin/AdminOrders";
 import UpdateService from "./screens/Admin/UpdateService";
 import NewService from "./screens/Admin/NewService";
+import ServiceImages from "./screens/Admin/ServiceImages";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,7 +65,7 @@ const Main = () => {
           <Stack.Screen name="adminorders" component={AdminOrders} />
           <Stack.Screen name="updateservice" component={UpdateService} />
           <Stack.Screen name="newservice" component={NewService} />
-          <Stack.Screen name="productimages" component={ProductImages} />
+          <Stack.Screen name="serviceimages" component={ServiceImages} />
         </Stack.Group>
       </Stack.Navigator>
 

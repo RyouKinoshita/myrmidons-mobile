@@ -49,16 +49,18 @@ const Header = ({ back, emptyCart = false }) => {
         }}
         onPress={emptyCart ? emptyCartHandler : () => navigate.navigate("cart")}
       >
-        <Avatar.Icon
-          style={{
-            backgroundColor: colors.color1,
-          }}
-          icon={emptyCart ? "delete-outline" : "cart-outline"}
-          color={
-            route.name === "productdetails" ? colors.color2 : colors.color3
-          }
-          size={40} // Set the size of the icon
-        />
+        {route.name === "cart" && (
+          <Avatar.Icon
+            style={{
+              backgroundColor: colors.color1,
+            }}
+            icon="delete-outline"
+            color={
+              route.name === "productdetails" ? colors.color2 : colors.color3
+            }
+            size={40} // Set the size of the icon
+          />
+        )}
       </TouchableOpacity>
     </>
   );
