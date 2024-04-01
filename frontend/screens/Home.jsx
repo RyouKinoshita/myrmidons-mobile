@@ -74,6 +74,17 @@ export const portfolios = [
       },
     ],
   },
+  {
+    name: "Project 2",
+    location: "IAC",
+    date: "01-21-2024",
+    _id: "port2",
+    images: [
+      {
+        url: "https://picsum.photos/id/47/400/300",
+      },
+    ],
+  },
 ];
 const Home = () => {
   const [category, setCategory] = useState("");
@@ -122,128 +133,143 @@ const Home = () => {
   //   "PC/Mobile Game Management",
   // ];
   return (
-    <>
-      {activeSearch && (
-        <SearchModal
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          setActiveSearch={setActiveSearch}
-          products={products}
-        />
-      )}
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        {activeSearch && (
+          <SearchModal
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            setActiveSearch={setActiveSearch}
+            products={products}
+          />
+        )}
 
-      <View style={defaultStyle}>
-        <Header />
+        <View style={defaultStyle}>
+          <Header />
 
-        {/* heading row */}
+          {/* heading row */}
 
-        <View
-          style={{
-            paddingTop: 70,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          {/* heading */}
-          <View>
-            <Text style={{ fontSize: 25 }}>
-              Our
-              <Text style={{ fontSize: 25, fontWeight: "900" }}> Services</Text>
-            </Text>
-          </View>
-
-          {/* search bar */}
-          <View>
-            <TouchableOpacity onPress={() => setActiveSearch((prev) => !prev)}>
-              <Avatar.Icon
-                icon={"magnify"}
-                size={50}
-                color={"gray"}
-                style={{ backgroundColor: colors.color1, elevation: 12 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Categories */}
-
-        <View
-          style={{
-            flexDirection: "row",
-            height: 80,
-          }}
-        >
-          <ScrollView
-            horizontal
-            contentContainerStyle={{
+          <View
+            style={{
+              paddingTop: 70,
+              flexDirection: "row",
+              justifyContent: "space-between",
               alignItems: "center",
             }}
-            showsHorizontalScrollIndicator={false}
           >
-            {categories.map((item, index) => (
-              <Button
-                key={item._id}
-                style={{
-                  backgroundColor:
-                    category === item._id ? colors.color1 : colors.color5,
-                  borderRadius: 100,
-                  margin: 3,
-                }}
-                onPress={() => categoryButtonHandler(item._id)}
-              >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: category === item._id ? colors.color2 : "gray",
-                  }}
-                >
-                  {item.category}
+            {/* heading */}
+            <View>
+              <Text style={{ fontSize: 25 }}>
+                Our
+                <Text style={{ fontSize: 25, fontWeight: "900" }}>
+                  {" "}
+                  Services
                 </Text>
-              </Button>
-            ))}
-          </ScrollView>
+              </Text>
+            </View>
+
+            {/* search bar */}
+            <View>
+              <TouchableOpacity
+                onPress={() => setActiveSearch((prev) => !prev)}
+              >
+                <Avatar.Icon
+                  icon={"magnify"}
+                  size={50}
+                  color={"gray"}
+                  style={{ backgroundColor: colors.color1, elevation: 12 }}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Categories */}
+
+          <View
+            style={{
+              flexDirection: "row",
+              height: 80,
+            }}
+          >
+            <ScrollView
+              horizontal
+              contentContainerStyle={{
+                alignItems: "center",
+              }}
+              showsHorizontalScrollIndicator={false}
+            >
+              {categories.map((item, index) => (
+                <Button
+                  key={item._id}
+                  style={{
+                    backgroundColor:
+                      category === item._id ? colors.color1 : colors.color5,
+                    borderRadius: 100,
+                    margin: 3,
+                  }}
+                  onPress={() => categoryButtonHandler(item._id)}
+                >
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: category === item._id ? colors.color2 : "gray",
+                    }}
+                  >
+                    {item.category}
+                  </Text>
+                </Button>
+              ))}
+            </ScrollView>
+          </View>
+
+          {/* Products */}
+          <View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {products.map((item, index) => (
+                <ProductCard
+                  stock={item.stock}
+                  name={item.name}
+                  price={item.price}
+                  image={item.images[0]?.url}
+                  addToCardHandler={addToCardHandler}
+                  id={item._id}
+                  key={item._id}
+                  i={index}
+                  navigate={navigate}
+                />
+              ))}
+            </ScrollView>
+          </View>
+
+          {/* Portfolios */}
+          <View style={{ marginTop: 40 }}>
+            <View>
+              <Text style={{ fontSize: 25 }}>
+                Our
+                <Text style={{ fontSize: 25, fontWeight: "900" }}>
+                  {" "}
+                  Projects
+                </Text>
+              </Text>
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {portfolios.map((item, index) => (
+                <PortfolioCard
+                  name={item.name}
+                  location={item.location}
+                  date={item.date}
+                  image={item.images[0]?.url}
+                  id={item._id}
+                  key={item._id}
+                  i={index}
+                />
+              ))}
+            </ScrollView>
+          </View>
         </View>
-
-        {/* Products */}
-        <View style={{ flex: 1 }}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {products.map((item, index) => (
-              <ProductCard
-                stock={item.stock}
-                name={item.name}
-                price={item.price}
-                image={item.images[0]?.url}
-                addToCardHandler={addToCardHandler}
-                id={item._id}
-                key={item._id}
-                i={index}
-                navigate={navigate}
-              />
-            ))}
-          </ScrollView>
-        </View>
-
-        {/* Portfolios */}
-        {/* <View style={{ flex: 1 }}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {portfolios.map((item, index) => (
-              <PortfolioCard
-                name={item.name}
-                location={item.location}
-                date={item.date}
-                image={item.images[0]?.url}
-                id={item._id}
-                key={item._id}
-                i={index}
-              />
-            ))}
-          </ScrollView>
-        </View> */}
-      </View>
-
+      </ScrollView>
       <Footer activeRoute={"home"} />
-    </>
+    </View>
   );
 };
 
