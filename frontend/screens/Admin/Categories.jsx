@@ -1,148 +1,139 @@
-import React, { useState } from "react";
 import {
   View,
   Text,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
-  TextInput,
 } from "react-native";
+import React, { useState } from "react";
+import {
+  colors,
+  defaultStyle,
+  formHeading,
+  inputOptions,
+} from "../../styles/styles";
 import Header from "../../components/Header";
-import Loader from "../../components/Loader";
-import Footer from "../../components/Footer";
-import { colors, defaultStyle } from "../../styles/styles";
-import { MaterialIcons } from "@expo/vector-icons";
-import { categories } from "../Home";
+import { Avatar, Button, TextInput } from "react-native-paper";
+import { useMessageAndErrorOther, useSetCategories } from "../../utils/hooks";
+import { useIsFocused } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { addCategory, deleteCategory } from "../../redux/actions/otherAction";
 
 const Categories = ({ navigation }) => {
-  const [newCategory, setNewCategory] = useState("");
-  const [categoryList, setCategoryList] = useState(categories);
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
 
-  const addCategoryHandler = () => {
-    if (newCategory.trim() === "") {
-      return;
-    }
-    const newCategoryItem = {
-      category: newCategory,
-      _id: newCategory.toLowerCase().replace(/\s/g, ""),
-    };
-    setCategoryList([...categoryList, newCategoryItem]);
-    setNewCategory("");
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+
+  useSetCategories(setCategories, isFocused);
+
+  const loading = useMessageAndErrorOther(dispatch, navigation, "adminpanel");
+
+  const deleteHandler = (id) => {
+    dispatch(deleteCategory(id));
   };
 
-  const deleteCategoryHandler = (categoryId) => {
-    const updatedCategories = categoryList.filter(
-      (category) => category._id !== categoryId
-    );
-    setCategoryList(updatedCategories);
+  const submitHandler = () => {
+    dispatch(addCategory(category));
   };
-
-  const loading = false;
 
   return (
-    <>
-      <View style={defaultStyle}>
-        <Header back={true} />
-        <View style={styles.headingContainer}>
-          <Text style={styles.heading}>Categories</Text>
-        </View>
-        <ScrollView style={styles.scrollView}>
-          {/* {categoryList.map((category, index) => (
-          <View key={category._id} style={styles.categoryItem}>
-            <Text style={styles.categoryName}>{category.category}</Text>
-            <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={() => editCategoryHandler(category._id)}>
-                <MaterialIcons name="edit" size={24} color={colors.color2} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => deleteCategoryHandler(category._id)}>
-                <MaterialIcons name="delete" size={24} color={colors.color2} />
-              </TouchableOpacity>
-            </View>
-          </View>
-        ))} */}
-        </ScrollView>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter category"
-            value={newCategory}
-            onChangeText={(text) => setNewCategory(text)}
-          />
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={addCategoryHandler}
-          >
-            <Text style={styles.addButtonText}>Add</Text>
-          </TouchableOpacity>
-        </View>
+    <View style={{ ...defaultStyle, backgroundColor: colors.color5 }}>
+      <Header back={true} />
+
+      {/* Heading */}
+      <View style={{ marginBottom: 20, paddingTop: 70 }}>
+        <Text style={formHeading}>Categories</Text>
       </View>
-      <Footer />
-    </>
+
+      <ScrollView
+        style={{
+          marginBottom: 20,
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: colors.color2,
+            padding: 20,
+            minHeight: 400,
+          }}
+        >
+          {categories.map((i) => (
+            <CategoryCard
+              name={i.category}
+              id={i._id}
+              key={i._id}
+              deleteHandler={deleteHandler}
+            />
+          ))}
+        </View>
+      </ScrollView>
+
+      <View style={styles.container}>
+        <TextInput
+          {...inputOptions}
+          placeholder="Add new categories"
+          value={category}
+          onChangeText={setCategory}
+        />
+
+        <Button
+          textColor={colors.color2}
+          style={{
+            backgroundColor: colors.color1,
+            margin: 20,
+            padding: 6,
+          }}
+          loading={loading}
+          disabled={!category}
+          onPress={submitHandler}
+        >
+          Add
+        </Button>
+      </View>
+    </View>
   );
 };
 
+const CategoryCard = ({ name, id, deleteHandler }) => (
+  <View style={styles.cardContainer}>
+    <Text style={styles.cardText}>{name}</Text>
+    <TouchableOpacity onPress={() => deleteHandler(id)}>
+      <Avatar.Icon
+        icon={"delete"}
+        size={30}
+        style={{
+          backgroundColor: colors.color1,
+        }}
+      />
+    </TouchableOpacity>
+  </View>
+);
+
+export default Categories;
+
 const styles = StyleSheet.create({
-  headingContainer: {
-    paddingTop: 70,
-    marginBottom: 20,
-    alignItems: "center",
+  container: {
+    padding: 20,
+    elevation: 10,
+    borderRadius: 10,
+    backgroundColor: colors.color3,
   },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: colors.color2,
-    marginTop: 40,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    marginBottom: 10,
-    borderTopWidth: 1,
-    borderTopColor: colors.color1,
-    paddingTop: 10,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    borderColor: colors.color1,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginRight: 10,
-    backgroundColor: colors.color1,
-    color: "black",
-  },
-  addButton: {
-    backgroundColor: colors.color1,
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-  addButtonText: {
-    color: colors.color3,
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  scrollView: {
-    flex: 1,
-    paddingHorizontal: 2,
-  },
-  categoryItem: {
+
+  cardContainer: {
+    backgroundColor: colors.color2,
+    elevation: 5,
+    margin: 10,
+    padding: 15,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.color1,
+    borderRadius: 10,
   },
-  categoryName: {
-    fontSize: 15,
-    color: colors.color2,
-  },
-  iconContainer: {
-    flexDirection: "row",
+  cardText: {
+    fontWeight: "600",
+    textTransform: "uppercase",
+    letterSpacing: 1,
   },
 });
-
-export default Categories;
