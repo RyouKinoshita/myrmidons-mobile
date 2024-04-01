@@ -22,6 +22,7 @@ import { loadUser } from "./redux/actions/userActions";
 import Camera from "./screens/Camera";
 import AdminOrders from "./screens/Admin/AdminOrders";
 import UpdateProduct from "./screens/Admin/UpdateProduct";
+import NewProduct from "./screens/Admin/NewProduct";
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +63,7 @@ const Main = () => {
           <Stack.Screen name="categories" component={Categories} />
           <Stack.Screen name="adminorders" component={AdminOrders} />
           <Stack.Screen name="updateproduct" component={UpdateProduct} />
+          <Stack.Screen name="newproduct" component={NewProduct} />
         </Stack.Group>
       </Stack.Navigator>
 
