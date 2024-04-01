@@ -83,7 +83,7 @@ const AdminPanel = ({ navigation }) => {
               </View>
               <ServiceListHeading />
               <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
+                {/* <View>
                   {services.map((item, index) => (
                     <ServiceListItem
                       key={item._id}
@@ -98,7 +98,7 @@ const AdminPanel = ({ navigation }) => {
                       navigate={navigation}
                     />
                   ))}
-                </View>
+                </View> */}
               </ScrollView>
             </View>
           </>
