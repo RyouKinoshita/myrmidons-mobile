@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./screens/Home";
@@ -17,10 +17,17 @@ import ChangePassword from "./screens/ChangePassword";
 import Order from "./screens/Order";
 import AdminPanel from "./screens/Admin/AdminPanel";
 import Categories from "./screens/Admin/Categories";
+import { useDispatch } from "react-redux";
+import { loadUser } from "./redux/actions/userActions";
 
 const Stack = createNativeStackNavigator();
 
 const Main = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -43,12 +50,12 @@ const Main = () => {
           <Stack.Screen name="orders" component={Order} />
 
           {/* Password Resetting Routes */}
-          <Stack.Screen name="forgetpassword" component={ForgetPassword } />
-          <Stack.Screen name="verify" component={Verify } />
+          <Stack.Screen name="forgetpassword" component={ForgetPassword} />
+          <Stack.Screen name="verify" component={Verify} />
 
           {/* Admin Routes */}
-          <Stack.Screen name="adminpanel" component={AdminPanel } />
-          <Stack.Screen name="categories" component={Categories } />
+          <Stack.Screen name="adminpanel" component={AdminPanel} />
+          <Stack.Screen name="categories" component={Categories} />
         </Stack.Group>
       </Stack.Navigator>
 
