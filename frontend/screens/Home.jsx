@@ -5,6 +5,7 @@ import { Avatar, Button } from "react-native-paper";
 import Header from "../components/Header";
 import SearchModal from "../components/SearchModal";
 import ProductCard from "../components/ProductCard";
+import PortfolioCard from "../components/PortfolioCard";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
 
@@ -12,7 +13,6 @@ export const categories = [
   { category: "Digital Marketing", _id: "digitalmarketing" },
   { category: "Social Media Management", _id: "smm" },
   { category: "Graphics & Video Production", _id: "gvp" },
-
 ];
 
 export const products = [
@@ -42,7 +42,7 @@ export const products = [
     price: 54321,
     stock: 2,
     name: "Service 3",
-    _id: "prod2",
+    _id: "prod3",
     images: [
       {
         url: "https://picsum.photos/id/45/400/300",
@@ -53,10 +53,24 @@ export const products = [
     price: 54321,
     stock: 2,
     name: "Service 4",
-    _id: "prod2",
+    _id: "prod4",
     images: [
       {
         url: "https://picsum.photos/id/45/400/300",
+      },
+    ],
+  },
+];
+
+export const portfolios = [
+  {
+    name: "Project 1",
+    location: "TUP-T",
+    date: "03-18-2024",
+    _id: "port1",
+    images: [
+      {
+        url: "https://picsum.photos/id/9/400/300",
       },
     ],
   },
@@ -209,6 +223,23 @@ const Home = () => {
             ))}
           </ScrollView>
         </View>
+
+        {/* Portfolios */}
+        {/* <View style={{ flex: 1 }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {portfolios.map((item, index) => (
+              <PortfolioCard
+                name={item.name}
+                location={item.location}
+                date={item.date}
+                image={item.images[0]?.url}
+                id={item._id}
+                key={item._id}
+                i={index}
+              />
+            ))}
+          </ScrollView>
+        </View> */}
       </View>
 
       <Footer activeRoute={"home"} />
