@@ -1,45 +1,45 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-export const productReducer = createReducer(
+export const serviceReducer = createReducer(
   {
-    products: [],
-    product: {},
+    services: [],
+    service: {},
   },
   (builder) => {
     builder
-      .addCase("getAllProductsRequest", (state) => {
+      .addCase("getAllServicesRequest", (state) => {
         state.loading = true;
       })
-      .addCase("getAdminProductsRequest", (state) => {
+      .addCase("getAdminServicesRequest", (state) => {
         state.loading = true;
       })
-      .addCase("getProductDetailsRequest", (state) => {
+      .addCase("getServiceDetailsRequest", (state) => {
         state.loading = true;
       })
-      .addCase("getAllProductsSuccess", (state, action) => {
+      .addCase("getAllServicesSuccess", (state, action) => {
         state.loading = false;
-        state.products = action.payload;
+        state.services = action.payload;
       })
-      .addCase("getAdminProductsSuccess", (state, action) => {
+      .addCase("getAdminServicesSuccess", (state, action) => {
         state.loading = false;
-        state.products = action.payload.products;
+        state.services = action.payload.services;
         state.inStock = action.payload.inStock;
         state.outOfStock = action.payload.outOfStock;
       })
-      .addCase("getProductDetailsSuccess", (state, action) => {
+      .addCase("getServiceDetailsSuccess", (state, action) => {
         state.loading = false;
-        state.product = action.payload;
+        state.service = action.payload;
       })
 
-      .addCase("getAllProductsFail", (state, action) => {
+      .addCase("getAllServicesFail", (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase("getAdminProductsFail", (state, action) => {
+      .addCase("getAdminServicesFail", (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase("getProductDetailsFail", (state, action) => {
+      .addCase("getServiceDetailsFail", (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

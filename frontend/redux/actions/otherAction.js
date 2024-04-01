@@ -177,7 +177,7 @@ export const addCategory = (category) => async (dispatch) => {
     });
 
     const { data } = await axios.post(
-      `${server}/product/category`,
+      `${server}/service/category`,
 
       {
         category,
@@ -208,7 +208,7 @@ export const deleteCategory = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.delete(
-      `${server}/product/category/${id}`,
+      `${server}/service/category/${id}`,
 
       {
         withCredentials: true,
@@ -226,13 +226,13 @@ export const deleteCategory = (id) => async (dispatch) => {
   }
 };
 
-export const createProduct = (formData) => async (dispatch) => {
+export const createService = (formData) => async (dispatch) => {
   try {
     dispatch({
-      type: "addProductRequest",
+      type: "addServiceRequest",
     });
 
-    const { data } = await axios.post(`${server}/product/new`, formData, {
+    const { data } = await axios.post(`${server}/service/new`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -240,25 +240,25 @@ export const createProduct = (formData) => async (dispatch) => {
     });
 
     dispatch({
-      type: "addProductSuccess",
+      type: "addServiceSuccess",
       payload: data.message,
     });
   } catch (error) {
     dispatch({
-      type: "addProductFail",
+      type: "addServiceFail",
       payload: error.response.data.message,
     });
   }
 };
 
-export const updateProduct =
+export const updateService =
   (id, name, description, price, stock, category) => async (dispatch) => {
     try {
       dispatch({
-        type: "updateProductRequest",
+        type: "updateServiceRequest",
       });
       const { data } = await axios.put(
-        `${server}/product/single/${id}`,
+        `${server}/service/single/${id}`,
         {
           name,
           description,
@@ -275,25 +275,25 @@ export const updateProduct =
       );
 
       dispatch({
-        type: "updateProductSuccess",
+        type: "updateServiceSuccess",
         payload: data.message,
       });
     } catch (error) {
       dispatch({
-        type: "updateProductFail",
+        type: "updateServiceFail",
         payload: error.response.data.message,
       });
     }
   };
 
-export const updateProductImage = (productId, formData) => async (dispatch) => {
+export const updateServiceImage = (serviceId, formData) => async (dispatch) => {
   try {
     dispatch({
-      type: "updateProductImageRequest",
+      type: "updateServiceImageRequest",
     });
 
     const { data } = await axios.post(
-      `${server}/product/images/${productId}`,
+      `${server}/service/images/${serviceId}`,
       formData,
       {
         headers: {
@@ -304,62 +304,62 @@ export const updateProductImage = (productId, formData) => async (dispatch) => {
     );
 
     dispatch({
-      type: "updateProductImageSuccess",
+      type: "updateServiceImageSuccess",
       payload: data.message,
     });
   } catch (error) {
     dispatch({
-      type: "updateProductImageFail",
+      type: "updateServiceImageFail",
       payload: error.response.data.message,
     });
   }
 };
 
-export const deleteProductImage = (productId, imageId) => async (dispatch) => {
+export const deleteServiceImage = (serviceId, imageId) => async (dispatch) => {
   try {
     dispatch({
-      type: "deleteProductImageRequest",
+      type: "deleteServiceImageRequest",
     });
 
     const { data } = await axios.delete(
-      `${server}/product/images/${productId}?id=${imageId}`,
+      `${server}/service/images/${serviceId}?id=${imageId}`,
       {
         withCredentials: true,
       }
     );
 
     dispatch({
-      type: "deleteProductImageSuccess",
+      type: "deleteServiceImageSuccess",
       payload: data.message,
     });
   } catch (error) {
     dispatch({
-      type: "deleteProductImageFail",
+      type: "deleteServiceImageFail",
       payload: error.response.data.message,
     });
   }
 };
 
-export const deleteProduct = (productId) => async (dispatch) => {
+export const deleteService = (serviceId) => async (dispatch) => {
   try {
     dispatch({
-      type: "deleteProductRequest",
+      type: "deleteServiceRequest",
     });
 
     const { data } = await axios.delete(
-      `${server}/product/single/${productId}`,
+      `${server}/service/single/${serviceId}`,
       {
         withCredentials: true,
       }
     );
 
     dispatch({
-      type: "deleteProductSuccess",
+      type: "deleteServiceSuccess",
       payload: data.message,
     });
   } catch (error) {
     dispatch({
-      type: "deleteProductFail",
+      type: "deleteServiceFail",
       payload: error.response.data.message,
     });
   }

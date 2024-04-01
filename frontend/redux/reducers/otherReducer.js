@@ -23,19 +23,19 @@ export const otherReducer = createReducer({}, (builder) => {
     .addCase("deleteCategoryRequest", (state) => {
       state.loading = true;
     })
-    .addCase("addProductRequest", (state) => {
+    .addCase("addServiceRequest", (state) => {
       state.loading = true;
     })
-    .addCase("updateProductRequest", (state) => {
+    .addCase("updateServiceRequest", (state) => {
       state.loading = true;
     })
-    .addCase("updateProductImageRequest", (state) => {
+    .addCase("updateServiceImageRequest", (state) => {
       state.loading = true;
     })
-    .addCase("deleteProductImageRequest", (state) => {
+    .addCase("deleteServiceImageRequest", (state) => {
       state.loading = true;
     })
-    .addCase("deleteProductRequest", (state) => {
+    .addCase("deleteServiceRequest", (state) => {
       state.loading = true;
     })
     .addCase("forgetPasswordRequest", (state) => {
@@ -72,23 +72,23 @@ export const otherReducer = createReducer({}, (builder) => {
       state.loading = false;
       state.message = action.payload;
     })
-    .addCase("addProductSuccess", (state, action) => {
+    .addCase("addServiceSuccess", (state, action) => {
       state.loading = false;
       state.message = action.payload;
     })
-    .addCase("updateProductSuccess", (state, action) => {
+    .addCase("updateServiceSuccess", (state, action) => {
       state.loading = false;
       state.message = action.payload;
     })
-    .addCase("updateProductImageSuccess", (state, action) => {
+    .addCase("updateServiceImageSuccess", (state, action) => {
       state.loading = false;
       state.message = action.payload;
     })
-    .addCase("deleteProductImageSuccess", (state, action) => {
+    .addCase("deleteServiceImageSuccess", (state, action) => {
       state.loading = false;
       state.message = action.payload;
     })
-    .addCase("deleteProductSuccess", (state, action) => {
+    .addCase("deleteServiceSuccess", (state, action) => {
       state.loading = false;
       state.message = action.payload;
     })
@@ -128,23 +128,23 @@ export const otherReducer = createReducer({}, (builder) => {
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase("addProductFail", (state, action) => {
+    .addCase("addServiceFail", (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase("updateProductFail", (state, action) => {
+    .addCase("updateServiceFail", (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase("updateProductImageFail", (state, action) => {
+    .addCase("updateServiceImageFail", (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase("deleteProductImageFail", (state, action) => {
+    .addCase("deleteServiceImageFail", (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase("deleteProductFail", (state, action) => {
+    .addCase("deleteServiceFail", (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })
