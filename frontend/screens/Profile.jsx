@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Button } from "react-native-paper";
-import { colors, formHeading } from "../styles/styles";
+import {
+  colors,
+  defaultImg,
+  defaultStyle,
+  formHeading,
+} from "../styles/styles";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import ButtonBox from "../components/ButtonBox";
-import { Ionicons } from "@expo/vector-icons"; // Import the icon component
-import { useDispatch } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useMessageAndErrorOther,
   useMessageAndErrorUser,
 } from "../utils/hooks";
 import { loadUser, logout } from "../redux/actions/userActions";
+import { useIsFocused } from "@react-navigation/native";
+import mime from "mime";
+import { updatePic } from "../redux/actions/otherAction";
 
 const transactions = [
   { id: 1, date: "2024-03-30", amount: 100 },
@@ -38,13 +46,12 @@ const TransactionHistory = () => (
   </View>
 );
 
-const user = {
-  name: "John Radilh Mancao",
-  email: "johnradilh.mancao@gmail.com",
-};
+const Profile = ({ navigation, route }) => {
+  const { user } = useSelector((state) => state.user);
+  const [avatar, setAvatar] = useState(defaultImg);
 
-const Profile = ({ navigation }) => {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
   const loading = useMessageAndErrorUser(navigation, dispatch, "login");
 
@@ -74,10 +81,34 @@ const Profile = ({ navigation }) => {
     }
   };
 
+  const loadingPic = useMessageAndErrorOther(dispatch, null, null, loadUser);
+
+  useEffect(() => {
+    if (route.params?.image) {
+      setAvatar(route.params.image);
+      // dispatch updatePic Here
+      const myForm = new FormData();
+      myForm.append("file", {
+        uri: route.params.image,
+        type: mime.getType(route.params.image),
+        name: route.params.image.split("/").pop(),
+      });
+      dispatch(updatePic(myForm));
+    }
+
+    dispatch(loadUser());
+  }, [route.params, dispatch, isFocused]);
+
+  useEffect(() => {
+    if (user?.avatar) {
+      setAvatar(user.avatar.url);
+    }
+  }, [user]);
+
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.heading}>Profile</Text>
+        <Text style={styles.heading}>My Profile</Text>
 
         {loading ? (
           <Loader />
@@ -92,16 +123,24 @@ const Profile = ({ navigation }) => {
 
             <View style={styles.avatarContainer}>
               <Avatar.Image
-                source={require("../assets/me.jpg")}
+                source={{
+                  uri: avatar,
+                }}
                 size={100}
                 style={styles.avatar}
               />
               <TouchableOpacity
+                disabled={loadingPic}
                 onPress={() =>
                   navigation.navigate("camera", { updateProfile: true })
                 }
               >
-                <Button mode="contained" style={styles.changePhotoButton}>
+                <Button
+                  disabled={loadingPic}
+                  loading={loadingPic}
+                  mode="contained"
+                  style={styles.changePhotoButton}
+                >
                   Change Photo
                 </Button>
               </TouchableOpacity>
@@ -116,12 +155,14 @@ const Profile = ({ navigation }) => {
                 text={"Orders"}
                 icon={"format-list-bulleted-square"}
               />
-              <ButtonBox
-                handler={navigateHandler}
-                icon={"view-dashboard"}
-                text={"Admin"}
-                reverse={true}
-              />
+              {user?.role === "admin" && (
+                <ButtonBox
+                  handler={navigateHandler}
+                  icon={"view-dashboard"}
+                  text={"Admin"}
+                  reverse={true}
+                />
+              )}
               <ButtonBox
                 handler={navigateHandler}
                 text={"Profile"}
