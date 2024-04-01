@@ -7,7 +7,7 @@ import { Headline } from 'react-native-paper'
 import OrderItem from './OrderItem'
 import Footer from '../components/Footer'
 
-const orders = [
+export const orders = [
   {
     _id: "asdasdasd",
     shippingInfo: {

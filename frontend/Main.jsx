@@ -20,6 +20,7 @@ import Categories from "./screens/Admin/Categories";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./redux/actions/userActions";
 import Camera from "./screens/Camera";
+import AdminOrders from "./screens/Admin/AdminOrders";
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,7 @@ const Main = () => {
           {/* Admin Routes */}
           <Stack.Screen name="adminpanel" component={AdminPanel} />
           <Stack.Screen name="categories" component={Categories} />
+          <Stack.Screen name="adminorders" component={AdminOrders} />
         </Stack.Group>
       </Stack.Navigator>
 
