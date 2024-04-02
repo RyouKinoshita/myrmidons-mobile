@@ -1,29 +1,12 @@
 import { asyncError } from "../middlewares/error.js";
 import { Order } from "../models/order.js";
-import { Service } from "../models/service.js";
 import ErrorHandler from "../utils/error.js";
-import { stripe } from "../server.js";
-
-export const processPayment = asyncError(async (req, res, next) => {
-  const { totalAmount } = req.body;
-
-  const { client_secret } = await stripe.paymentIntents.create({
-    amount: Number(totalAmount * 100),
-    currency: "inr",
-  });
-
-  res.status(200).json({
-    success: true,
-    client_secret,
-  });
-});
 
 export const createOrder = asyncError(async (req, res, next) => {
   const {
     eventInfo,
     orderItems,
     paymentMethod,
-    paymentInfo,
     itemsPrice,
     taxPrice,
     shippingCharges,
@@ -35,18 +18,11 @@ export const createOrder = asyncError(async (req, res, next) => {
     eventInfo,
     orderItems,
     paymentMethod,
-    paymentInfo,
     itemsPrice,
     taxPrice,
     shippingCharges,
     totalAmount,
   });
-
-  // for (let i = 0; i < orderItems.length; i++) {
-  //   const service = await Service.findById(orderItems[i].service);
-  //   service.stock -= orderItems[i].quantity;
-  //   await service.save();
-  // }
 
   res.status(201).json({
     success: true,

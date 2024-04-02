@@ -54,15 +54,11 @@ const schema = new mongoose.Schema({
 
   paymentMethod: {
     type: String,
-    enum: ["COD", "ONLINE"],
+    enum: ["COD", "Online Payment"],
     default: "COD",
   },
 
   paidAt: Date,
-  paymentInfo: {
-    id: String,
-    status: String,
-  },
 
   itemsPrice: {
     type: Number,
