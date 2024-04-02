@@ -63,7 +63,7 @@ const UpdateService = ({ navigation, route }) => {
       <View
         style={{
           ...defaultStyle,
-          backgroundColor: colors.color5,
+          backgroundColor: colors.color3,
         }}
       >
         <Header back={true} />
@@ -81,13 +81,13 @@ const UpdateService = ({ navigation, route }) => {
               padding: 20,
               elevation: 10,
               borderRadius: 10,
-              backgroundColor: colors.color3,
+              backgroundColor: colors.color5,
             }}
           >
             <View
               style={{
                 justifyContent: "center",
-                height: 650,
+                height: 470,
               }}
             >
               <Button

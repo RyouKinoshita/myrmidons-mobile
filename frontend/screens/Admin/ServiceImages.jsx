@@ -49,14 +49,14 @@ const ServiceImages = ({ navigation, route }) => {
     <View
       style={{
         ...defaultStyle,
-        backgroundColor: colors.color5,
+        backgroundColor: colors.color3,
       }}
     >
       <Header back={true} />
 
       {/* Heading */}
       <View style={{ marginBottom: 20, paddingTop: 70 }}>
-        <Text style={formHeading}>Images</Text>
+        <Text style={formHeading}>Edit Images</Text>
       </View>
 
       <ScrollView
@@ -86,7 +86,7 @@ const ServiceImages = ({ navigation, route }) => {
         style={{
           padding: 20,
           borderRadius: 10,
-          backgroundColor: colors.color3,
+          backgroundColor: colors.color5,
         }}
       >
         <Image

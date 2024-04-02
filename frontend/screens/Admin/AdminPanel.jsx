@@ -22,13 +22,13 @@ const AdminPanel = ({ navigation }) => {
 
   const navigationHandler = (text) => {
     switch (text) {
-      case "Category":
+      case "Add New Category":
         navigation.navigate("categories");
         break;
-      case "All Orders":
+      case "View All Orders":
         navigation.navigate("adminorders");
         break;
-      case "Service":
+      case "Add New Service":
         navigation.navigate("newservice");
         break;
       default:
@@ -53,13 +53,13 @@ const AdminPanel = ({ navigation }) => {
       <View style={styles.container}>
         <Header back={true} />
         <View style={styles.headingContainer}>
-          <Text style={styles.heading}>Admin Panel</Text>
+          <Text style={styles.heading}>Admin Dashboard</Text>
         </View>
         {loading ? (
           <Loader />
         ) : (
           <>
-            <View
+            {/* <View
               style={{
                 backgroundColor: colors.color3,
                 borderRadius: 20,
@@ -67,23 +67,23 @@ const AdminPanel = ({ navigation }) => {
               }}
             >
               <Chart inStock={12} outOfStock={2} />
-            </View>
+            </View> */}
 
             <View style={styles.content}>
               <View style={styles.buttonRow}>
                 <ButtonBox
                   icon={"plus"}
-                  text={"Service"}
+                  text={"Add New Service"}
                   handler={navigationHandler}
                 />
                 <ButtonBox
                   icon={"format-list-bulleted-square"}
-                  text={"All Orders"}
+                  text={"View All Orders"}
                   handler={navigationHandler}
                 />
                 <ButtonBox
                   icon={"plus"}
-                  text={"Category"}
+                  text={"Add New Category"}
                   handler={navigationHandler}
                 />
               </View>

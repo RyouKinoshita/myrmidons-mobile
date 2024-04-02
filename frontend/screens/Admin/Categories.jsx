@@ -39,12 +39,12 @@ const Categories = ({ navigation }) => {
   };
 
   return (
-    <View style={{ ...defaultStyle, backgroundColor: colors.color5 }}>
+    <View style={{ ...defaultStyle, backgroundColor: colors.color3 }}>
       <Header back={true} />
 
       {/* Heading */}
       <View style={{ marginBottom: 20, paddingTop: 70 }}>
-        <Text style={formHeading}>Categories</Text>
+        <Text style={formHeading}>Add New Categories</Text>
       </View>
 
       <ScrollView
@@ -54,7 +54,7 @@ const Categories = ({ navigation }) => {
       >
         <View
           style={{
-            backgroundColor: colors.color2,
+            backgroundColor: colors.color3,
             padding: 20,
             minHeight: 400,
           }}
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 10,
-    backgroundColor: colors.color3,
+    backgroundColor: colors.color5,
   },
 
   cardContainer: {

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { colors } from "../styles/styles";
 import { Button } from "react-native-paper";
@@ -23,7 +23,7 @@ const ServiceCard = ({
           width: 250,
           alignItems: "center",
           justifyContent: "space-between",
-          marginHorizontal: 10,
+          marginHorizontal: 20,
           borderRadius: 20,
           height: 400,
           backgroundColor: i % 2 === 0 ? colors.color1 : colors.color2,

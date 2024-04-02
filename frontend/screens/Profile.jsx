@@ -21,31 +21,6 @@ import { useIsFocused } from "@react-navigation/native";
 import mime from "mime";
 import { updatePic } from "../redux/actions/otherAction";
 
-// const transactions = [
-//   { id: 1, date: "2024-03-30", amount: 100 },
-//   { id: 2, date: "2024-03-29", amount: 150 },
-//   { id: 3, date: "2024-03-28", amount: 200 },
-// ];
-
-// const TransactionItem = ({ date, amount }) => (
-//   <View style={styles.transactionItem}>
-//     <Text>{date}</Text>
-//     <Text>{amount}</Text>
-//   </View>
-// );
-// const TransactionHistory = () => (
-//   <View style={styles.transactionHistoryContainer}>
-//     <Text style={styles.transactionHistoryHeading}>Transaction History</Text>
-//     {transactions.map((transaction) => (
-//       <TransactionItem
-//         key={transaction.id}
-//         date={transaction.date}
-//         amount={transaction.amount}
-//       />
-//     ))}
-//   </View>
-// );
-
 const Profile = ({ navigation, route }) => {
   const { user } = useSelector((state) => state.user);
   const [avatar, setAvatar] = useState(defaultImg);
@@ -120,6 +95,11 @@ const Profile = ({ navigation, route }) => {
             >
               <Ionicons name="exit-outline" size={20} color={colors.color2} />
             </TouchableOpacity>
+            <Text style={styles.name}>
+              Welcome {""}
+              {user?.name}
+            </Text>
+            <Text style={styles.email}>{user?.email}</Text>
 
             <View style={styles.avatarContainer}>
               <Avatar.Image
@@ -129,25 +109,23 @@ const Profile = ({ navigation, route }) => {
                 size={100}
                 style={styles.avatar}
               />
-              <TouchableOpacity
-                disabled={loadingPic}
-                onPress={() =>
-                  navigation.navigate("camera", { updateProfile: true })
-                }
-              >
-                <Button
-                  disabled={loadingPic}
-                  loading={loadingPic}
-                  mode="contained"
-                  style={styles.changePhotoButton}
-                >
-                  Change Photo
-                </Button>
-              </TouchableOpacity>
             </View>
 
-            <Text style={styles.name}>{user?.name}</Text>
-            <Text style={styles.email}>{user?.email}</Text>
+            <TouchableOpacity
+              disabled={loadingPic}
+              onPress={() =>
+                navigation.navigate("camera", { updateProfile: true })
+              }
+            >
+              <Button
+                disabled={loadingPic}
+                loading={loadingPic}
+                mode="contained"
+                style={styles.changePhotoButton}
+              >
+                Update Photo
+              </Button>
+            </TouchableOpacity>
 
             <View style={styles.buttonContainer}>
               <ButtonBox
@@ -174,11 +152,6 @@ const Profile = ({ navigation, route }) => {
                 icon={"lock"}
               />
             </View>
-            
-
-            {/* <View style={styles.transactionHistoryContainer}>
-              <TransactionHistory />
-            </View> */}
           </>
         )}
       </View>
@@ -195,7 +168,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   heading: {
-    fontSize: 24,
+    fontSize: 40,
     fontWeight: "bold",
     color: colors.color2,
     marginBottom: 20,
@@ -212,10 +185,11 @@ const styles = StyleSheet.create({
   },
   changePhotoButton: {
     marginTop: 10,
+    marginBottom: 20,
     width: 150,
   },
   name: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: "bold",
     color: colors.color2,
     marginBottom: 5,

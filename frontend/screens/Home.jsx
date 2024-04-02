@@ -16,32 +16,8 @@ import {
 import { useSetCategories } from "../utils/hooks";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 
-export const portfolios = [
-  {
-    name: "Project 1",
-    location: "TUP-T",
-    date: "03-18-2024",
-    _id: "port1",
-    images: [
-      {
-        url: "https://picsum.photos/id/9/400/300",
-      },
-    ],
-  },
-  {
-    name: "Project 2",
-    location: "IAC",
-    date: "01-21-2024",
-    _id: "port2",
-    images: [
-      {
-        url: "https://picsum.photos/id/47/400/300",
-      },
-    ],
-  },
-];
 const Home = () => {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("all");
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);

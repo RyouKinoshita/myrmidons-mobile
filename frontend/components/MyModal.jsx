@@ -10,7 +10,7 @@ const MyModal = ({ id, deleteHandler, navigate, setOpenModal }) => {
         style={{
           position: "absolute",
           top: 10,
-          right: 10,
+          right: 5,
         }}
         onPress={() => setOpenModal(false)}
       >
@@ -27,11 +27,11 @@ const MyModal = ({ id, deleteHandler, navigate, setOpenModal }) => {
         style={styles.text}
         onPress={() => navigate.navigate("updateservice", { id })}
       >
-        Edit
+        Edit Service
       </Text>
 
-      <Button textColor={colors.color3} onPress={() => deleteHandler(id)}>
-        Delete
+      <Button textColor={colors.color7} onPress={() => deleteHandler(id)}>
+        Delete Service
       </Button>
     </View>
   );
@@ -39,7 +39,7 @@ const MyModal = ({ id, deleteHandler, navigate, setOpenModal }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
+    width: 150,
     height: 100,
     alignSelf: "center",
     justifyContent: "center",

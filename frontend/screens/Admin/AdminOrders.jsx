@@ -32,7 +32,7 @@ const AdminOrders = ({ navigation }) => {
 
       {/* Heading */}
       <View style={{ marginBottom: 20, paddingTop: 70 }}>
-        <Text style={formHeading}>Admin Orders</Text>
+        <Text style={formHeading}>Update Orders</Text>
       </View>
 
       {loading ? (

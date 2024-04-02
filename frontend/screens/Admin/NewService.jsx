@@ -60,27 +60,27 @@ const NewService = ({ navigation, route }) => {
       <View
         style={{
           ...defaultStyle,
-          backgroundColor: colors.color5,
+          backgroundColor: colors.color3,
         }}
       >
         <Header back={true} />
 
         <View style={{ marginBottom: 20, paddingTop: 70 }}>
-          <Text style={formHeading}>New Service</Text>
+          <Text style={formHeading}>Create New Service</Text>
         </View>
 
         <ScrollView
           style={{
-            padding: 20,
+            padding: 10,
             elevation: 10,
             borderRadius: 10,
-            backgroundColor: colors.color3,
+            backgroundColor: colors.color5,
           }}
         >
           <View
             style={{
               justifyContent: "center",
-              height: 650,
+              height: 550,
             }}
           >
             <View

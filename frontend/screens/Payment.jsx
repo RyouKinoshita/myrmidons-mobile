@@ -82,8 +82,8 @@ const Payment = ({ navigation, route }) => {
         containerStyle={{
           paddingTop: 70,
         }}
-        text1="Payment"
-        text2="Method"
+        text1="Event"
+        text2="Information"
       />
 
       <ScrollView contentContainerStyle={styles.container}>

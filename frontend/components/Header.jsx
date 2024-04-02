@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { colors } from "../styles/styles";
@@ -45,6 +45,14 @@ const Header = ({ back, emptyCart = false }) => {
         </TouchableOpacity>
       )}
 
+      {route.name !== "servicedetails" && (
+        <Image
+          source={require("../assets/logo.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+      )}
+
       <TouchableOpacity
         style={{
           position: "absolute",
@@ -70,5 +78,14 @@ const Header = ({ back, emptyCart = false }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  logo: {
+    height: 100,
+    width: "100%",
+    marginTop: 20,
+    marginBottom: -50,
+  },
+});
 
 export default Header;

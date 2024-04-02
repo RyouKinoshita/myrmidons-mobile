@@ -9,6 +9,15 @@ const CameraComponent = ({ navigation, route }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(CameraType.front);
   const [camera, setCamera] = useState(null);
+  const [flashMode, setFlashMode] = useState(Camera.Constants.FlashMode.off);
+
+  const toggleFlash = () => {
+    setFlashMode(
+      flashMode === Camera.Constants.FlashMode.off
+        ? Camera.Constants.FlashMode.on
+        : Camera.Constants.FlashMode.off
+    );
+  };
 
   const openImagePicker = async () => {
     const permissionResult =
@@ -87,6 +96,7 @@ const CameraComponent = ({ navigation, route }) => {
     >
       <Camera
         type={type}
+        flashMode={flashMode}
         style={{
           flex: 1,
           aspectRatio: 1,
@@ -113,6 +123,12 @@ const CameraComponent = ({ navigation, route }) => {
               prevType === CameraType.back ? CameraType.front : CameraType.back
             );
           }}
+        />
+        <MyIcon
+          icon={
+            flashMode === Camera.Constants.FlashMode.off ? "flash-off" : "flash"
+          }
+          handler={toggleFlash}
         />
       </View>
     </View>

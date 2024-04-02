@@ -26,8 +26,8 @@ const ConfirmOrder = () => {
         containerStyle={{
           paddingTop: 70,
         }}
-        text1="Confirm"
-        text2="Order"
+        text1="Order"
+        text2="Confirmation"
       />
 
       <View

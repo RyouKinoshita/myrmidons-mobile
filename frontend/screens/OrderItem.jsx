@@ -32,7 +32,7 @@ const OrderItem = ({
         ID - #{id}
       </Text>
 
-      <TextBox title={"Address"} value={address} i={i} />
+      <TextBox title={"Event Address"} value={address} i={i} />
       <TextBox title={"Ordered On"} value={orderedOn} i={i} />
       <TextBox title={"Price"} value={price} i={i} />
       <TextBox title={"Status"} value={status} i={i} />
