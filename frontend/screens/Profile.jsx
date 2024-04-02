@@ -21,30 +21,30 @@ import { useIsFocused } from "@react-navigation/native";
 import mime from "mime";
 import { updatePic } from "../redux/actions/otherAction";
 
-const transactions = [
-  { id: 1, date: "2024-03-30", amount: 100 },
-  { id: 2, date: "2024-03-29", amount: 150 },
-  { id: 3, date: "2024-03-28", amount: 200 },
-];
+// const transactions = [
+//   { id: 1, date: "2024-03-30", amount: 100 },
+//   { id: 2, date: "2024-03-29", amount: 150 },
+//   { id: 3, date: "2024-03-28", amount: 200 },
+// ];
 
-const TransactionItem = ({ date, amount }) => (
-  <View style={styles.transactionItem}>
-    <Text>{date}</Text>
-    <Text>{amount}</Text>
-  </View>
-);
-const TransactionHistory = () => (
-  <View style={styles.transactionHistoryContainer}>
-    <Text style={styles.transactionHistoryHeading}>Transaction History</Text>
-    {transactions.map((transaction) => (
-      <TransactionItem
-        key={transaction.id}
-        date={transaction.date}
-        amount={transaction.amount}
-      />
-    ))}
-  </View>
-);
+// const TransactionItem = ({ date, amount }) => (
+//   <View style={styles.transactionItem}>
+//     <Text>{date}</Text>
+//     <Text>{amount}</Text>
+//   </View>
+// );
+// const TransactionHistory = () => (
+//   <View style={styles.transactionHistoryContainer}>
+//     <Text style={styles.transactionHistoryHeading}>Transaction History</Text>
+//     {transactions.map((transaction) => (
+//       <TransactionItem
+//         key={transaction.id}
+//         date={transaction.date}
+//         amount={transaction.amount}
+//       />
+//     ))}
+//   </View>
+// );
 
 const Profile = ({ navigation, route }) => {
   const { user } = useSelector((state) => state.user);
@@ -175,9 +175,9 @@ const Profile = ({ navigation, route }) => {
               />
             </View>
 
-            <View style={styles.transactionHistoryContainer}>
+            {/* <View style={styles.transactionHistoryContainer}>
               <TransactionHistory />
-            </View>
+            </View> */}
           </>
         )}
       </View>
