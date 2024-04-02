@@ -1,93 +1,63 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import React from "react";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { colors } from "../styles/styles";
-import { Button } from "react-native-paper";
 
 const PortfolioCard = ({ name, location, date, image, id, i }) => {
   return (
-    <View
-      style={{
-        elevation: 15,
-        width: 250,
-        alignItems: "center",
-        justifyContent: "space-between",
-        marginHorizontal: 10,
-        borderRadius: 20,
-        height: 400,
-        backgroundColor: i % 2 === 0 ? colors.color1 : colors.color2,
-      }}
-    >
+    <View style={styles.cardContainer}>
       <Image
-        source={{
-          uri: image,
-        }}
-        style={{
-          width: "75%",
-          height: 200,
-          resizeMode: "contain",
-          position: "absolute",
-          left: 30,
-          top: 105,
-        }}
+        source={{ uri: image }}
+        style={styles.image}
       />
 
-      <View
-        style={{
-          flexDirection: "row",
-          padding: 20,
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-      >
-        <Text
-          numberOfLines={2}
-          style={{
-            color: i % 2 === 0 ? colors.color2 : colors.color3,
-            fontSize: 25,
-            fontWeight: "300",
-            width: "60%",
-          }}
-        >
-          {location}
-        </Text>
-
-        <Text
-          numberOfLines={2}
-          style={{
-            color: i % 2 === 0 ? colors.color2 : colors.color3,
-            fontSize: 25,
-            fontWeight: "300",
-            width: "60%",
-          }}
-        >
-          {date}
-        </Text>
-      </View>
-
-      <View
-        style={{
-          backgroundColor: i % 2 === 0 ? colors.color2 : colors.color3,
-          borderRadius: 0,
-          paddingVertical: 20,
-          borderBottomRightRadius: 20,
-          borderBottomLeftRadius: 20,
-          width: "100%",
-        }}
-      >
-        <Text
-          numberOfLines={2}
-          style={{
-            color: i % 2 === 0 ? colors.color1 : colors.color2,
-            fontSize: 35,
-            fontWeight: "700",
-            textAlign: "center",
-          }}
-        >
-          {name}
-        </Text>
+      <View style={styles.contentContainer}>
+        <Text style={styles.location}>{location}</Text>
+        <Text style={styles.date}>{date}</Text>
+        <Text numberOfLines={2} style={styles.name}>{name}</Text>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  cardContainer: {
+    width: 250,
+    height: 300,
+    borderRadius: 20,
+    backgroundColor: colors.color1,
+    overflow: "hidden",
+    marginHorizontal: 10,
+    marginBottom: 20,
+    elevation: 5,
+  },
+  image: {
+    width: "100%",
+    height: 150,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  contentContainer: {
+    padding: 10,
+    alignItems: "center",
+  },
+  location: {
+    color: colors.color2,
+    fontSize: 18,
+    fontWeight: "300",
+    marginBottom: 5,
+  },
+  date: {
+    color: colors.color2,
+    fontSize: 18,
+    fontWeight: "300",
+    marginBottom: 15,
+  },
+  name: {
+    color: colors.color2,
+    fontSize: 20,
+    fontWeight: "700",
+    textAlign: "center",
+  },
+});
 
 export default PortfolioCard;

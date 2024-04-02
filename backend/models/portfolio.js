@@ -15,7 +15,7 @@ const schema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-    default: 0,
+    default: 0, 
   },
   images: [{ public_id: String, url: String }],
   createdAt: {
