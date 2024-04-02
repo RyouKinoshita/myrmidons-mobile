@@ -94,13 +94,12 @@ export const updatePic = (formData) => async (dispatch) => {
 export const placeOrder =
   (
     orderItems,
-    shippingInfo,
+    eventInfo,
     paymentMethod,
     itemsPrice,
     taxPrice,
     shippingCharges,
-    totalAmount,
-    paymentInfo
+    totalAmount
   ) =>
   async (dispatch) => {
     try {
@@ -111,10 +110,9 @@ export const placeOrder =
       const { data } = await axios.post(
         `${server}/order/new`,
         {
-          shippingInfo,
+          eventInfo,
           orderItems,
           paymentMethod,
-          paymentInfo,
           itemsPrice,
           taxPrice,
           shippingCharges,

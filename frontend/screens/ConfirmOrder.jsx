@@ -11,10 +11,14 @@ import { useSelector } from "react-redux";
 const ConfirmOrder = () => {
   const navigate = useNavigation();
 
-  const itemsPrice = 4000;
-  const shippingCharges = 200;
-  const tax = 0.18 * itemsPrice;
-  const totalAmount = itemsPrice + shippingCharges + tax;
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const [itemsPrice] = useState(
+    cartItems.reduce((prev, curr) => prev + curr.price, 0)
+  );
+  const [shippingCharges] = useState(itemsPrice > 10000 ? 0 : 200);
+  const [tax] = useState(Number((0.18 * itemsPrice).toFixed()));
+  const [totalAmount] = useState(itemsPrice + shippingCharges + tax);
   return (
     <View style={defaultStyle}>
       <Header back={true} />

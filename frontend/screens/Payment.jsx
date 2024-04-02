@@ -1,28 +1,80 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import { colors, defaultStyle } from "../styles/styles";
 import Header from "../components/Header";
 import Heading from "../components/Heading";
-import { Button, RadioButton } from "react-native-paper";
+import { TextInput, Button, RadioButton } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-// import { placeOrder } from "../redux/actions/otherAction";
-// import { useMessageAndErrorOther } from "../utils/hooks";
-// import { useStripe } from "@stripe/stripe-react-native";
+import { placeOrder } from "../redux/actions/otherAction";
+import { useMessageAndErrorOther } from "../utils/hooks";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import axios from "axios";
-// import { server } from "../redux/store";
+import { server } from "../redux/store";
 import Loader from "../components/Loader";
 
 const Payment = ({ navigation, route }) => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [loaderLoading, setLoaderLoading] = useState(false);
+  const [datePickerVisible, setDatePickerVisible] = useState(false);
 
-  const isAuthenticated = true;
+  const [form, setForm] = useState({
+    address: "",
+    city: "",
+    country: "",
+    pinCode: "",
+    date: "",
+    paymentMethod: "COD",
+  });
+
+  const dispatch = useDispatch();
+
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const redirectToLogin = () => {
     navigation.navigate("login");
   };
-  const codHandler = () => {};
-  const onlineHandler = () => {};
+
+  const formHandler = () => {
+    const { address, city, country, pinCode, date, paymentMethod } = form;
+
+    const itemsPrice = route.params.itemsPrice;
+    const shippingCharges = route.params.shippingCharges;
+    const taxPrice = route.params.tax;
+    const totalAmount = route.params.totalAmount;
+
+    dispatch(
+      placeOrder(
+        cartItems,
+        { address, city, country, pinCode, date },
+        paymentMethod,
+        itemsPrice,
+        shippingCharges,
+        taxPrice,
+        totalAmount
+      )
+    );
+  };
+
+  const handleChange = (name) => (value) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const loading = useMessageAndErrorOther(
+    dispatch,
+    navigation,
+    "profile",
+    () => ({
+      type: "clearCart",
+    })
+  );
   return (
     <View style={defaultStyle}>
       <Header back={true} />
@@ -34,75 +86,108 @@ const Payment = ({ navigation, route }) => {
         text2="Method"
       />
 
-      <View style={styles.container}>
-        <RadioButton.Group
-          onValueChange={setPaymentMethod}
-          value={paymentMethod}
+      <ScrollView contentContainerStyle={styles.container}>
+        <TextInput
+          label="Address"
+          value={form.address}
+          onChangeText={handleChange("address")}
+          style={styles.input}
+        />
+        <TextInput
+          label="City"
+          value={form.city}
+          onChangeText={handleChange("city")}
+          style={styles.input}
+        />
+        <TextInput
+          label="Country"
+          value={form.country}
+          onChangeText={handleChange("country")}
+          style={styles.input}
+        />
+        <TextInput
+          label="Pin Code"
+          value={form.pinCode}
+          onChangeText={handleChange("pinCode")}
+          style={styles.input}
+        />
+        <TouchableOpacity
+          onPress={() => setDatePickerVisible(true)}
+          style={styles.datePickerButton}
         >
-          <View style={styles.radioStyle}>
-            <Text style={styles.radioStyleText}>Cash On Delivery</Text>
-            <RadioButton color={colors.color1} value={"COD"} />
+          <Text>{form.date ? form.date.toDateString() : "Select a date"}</Text>
+        </TouchableOpacity>
+        {datePickerVisible && (
+          <DateTimePicker
+            value={form.date || new Date()}
+            mode="date"
+            display="default"
+            onChange={(event, selectedDate) => {
+              setDatePickerVisible(false);
+              if (selectedDate) {
+                setForm({ ...form, date: selectedDate });
+              }
+            }}
+          />
+        )}
+
+        <RadioButton.Group
+          onValueChange={handleChange("paymentMethod")}
+          value={form.paymentMethod}
+        >
+          <View>
+            <Text>COD</Text>
+            <RadioButton value="COD" />
           </View>
-          <View style={styles.radioStyle}>
-            <Text style={styles.radioStyleText}>ONLINE</Text>
-            <RadioButton color={colors.color1} value={"ONLINE"} />
+          <View>
+            <Text>Online Payment</Text>
+            <RadioButton value="Online Payment" />
           </View>
         </RadioButton.Group>
-      </View>
-
-      <TouchableOpacity
-        disabled={loading}
-        onPress={
-          !isAuthenticated
-            ? redirectToLogin
-            : paymentMethod === "COD"
-            ? () => codHandler()
-            : onlineHandler
-        }
-      >
         <Button
+          mode="contained"
+          onPress={formHandler}
+          style={styles.loginButton}
+          labelStyle={{ color: colors.color2 }}
           loading={loading}
-          disabled={loading}
-          style={styles.btn}
-          textColor={colors.color2}
-          icon={
-            paymentMethod === "COD" ? "check-circle" : "circle-multiple-outline"
-          }
         >
-          {paymentMethod === "COD" ? "Place Order" : "Pay"}
+          Submit
         </Button>
-      </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.color3,
-    padding: 30,
-    borderRadius: 10,
-    marginVertical: 20,
-    flex: 1,
+    flexGrow: 1,
+    padding: 20,
+    backgroundColor: colors.color1,
     justifyContent: "center",
   },
-
-  radioStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginVertical: 5,
+  input: {
+    marginBottom: 10,
+    backgroundColor: colors.color2,
   },
-  radioStyleText: {
-    fontWeight: "600",
-    fontSize: 18,
-    textTransform: "uppercase",
+  loginButton: {
+    marginTop: 20,
+    backgroundColor: colors.color3,
+  },
+  selected: {
+    color: colors.color3,
+    textDecorationLine: "underline",
+  },
+  unselected: {
     color: colors.color2,
   },
-  btn: {
-    backgroundColor: colors.color3,
-    borderRadius: 100,
-    margin: 10,
-    padding: 5,
+  datePickerButton: {
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: colors.color2,
+    borderRadius: 5,
+  },
+  datePickerText: {
+    color: colors.color3,
   },
 });
 
