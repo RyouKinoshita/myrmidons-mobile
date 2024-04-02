@@ -14,30 +14,19 @@ import { singleUpload } from "../middlewares/multer.js";
 
 const router = express.Router();
 
-router.get("/all/portfolios", getAllPortfolios);
-router.get(
-  "/admin/adminportfolios",
-  isAuthenticated,
-  isAdmin,
-  getAdminPortfolios
-);
+router.get("/all", getAllPortfolios);
+router.get("/admin", isAuthenticated, isAdmin, getAdminPortfolios);
 
 router
-  .route("/single/portfolio/:id")
+  .route("/single/:id")
   .get(getPortfolioDetails)
   .put(isAuthenticated, isAdmin, updatePortfolio)
   .delete(isAuthenticated, isAdmin, deletePortfolio);
 
-router.post(
-  "/portfolio/new",
-  isAuthenticated,
-  isAdmin,
-  singleUpload,
-  createPortfolio
-);
+router.post("/new", isAuthenticated, isAdmin, singleUpload, createPortfolio);
 
 router
-  .route("/portfolio/images/:id")
+  .route("/images/:id")
   .post(isAuthenticated, isAdmin, singleUpload, addPortfolioImage)
   .delete(isAuthenticated, isAdmin, deletePortfolioImage);
 
