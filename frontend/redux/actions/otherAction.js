@@ -442,39 +442,37 @@ export const createPortfolio = (formData) => async (dispatch) => {
   }
 };
 
-export const updatePortfolio =
-  (id, name, description, price, category) => async (dispatch) => {
-    try {
-      dispatch({
-        type: "updatePortfolioRequest",
-      });
-      const { data } = await axios.put(
-        `${server}/portfolio/single/${id}`,
-        {
-          name,
-          description,
-          price,
-          category,
+export const updatePortfolio = (name, location, date) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "updatePortfolioRequest",
+    });
+    const { data } = await axios.put(
+      `${server}/portfolio/single/${id}`,
+      {
+        name,
+        location,
+        date,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+        withCredentials: true,
+      }
+    );
 
-      dispatch({
-        type: "updatePortfolioSuccess",
-        payload: data.message,
-      });
-    } catch (error) {
-      dispatch({
-        type: "updatePortfolioFail",
-        payload: error.response.data.message,
-      });
-    }
-  };
+    dispatch({
+      type: "updatePortfolioSuccess",
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: "updatePortfolioFail",
+      payload: error.response.data.message,
+    });
+  }
+};
 
 export const updatePortfolioImage =
   (portfolioId, formData) => async (dispatch) => {
