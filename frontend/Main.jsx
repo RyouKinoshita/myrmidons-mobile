@@ -67,7 +67,7 @@ const Main = () => {
           <Stack.Screen name="updateservice" component={UpdateService} />
           <Stack.Screen name="newservice" component={NewService} />
           <Stack.Screen name="serviceimages" component={ServiceImages} />
-          <Stack.Screen name="newportfolio" component={NewPortfolio} />
+          <Stack.Screen name="portfolio" component={NewPortfolio} />
         </Stack.Group>
       </Stack.Navigator>
 

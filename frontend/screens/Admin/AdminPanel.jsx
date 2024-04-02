@@ -40,6 +40,9 @@ const AdminPanel = ({ navigation }) => {
         navigation.navigate("newservice");
         break;
 
+      case "Portfolio":
+        navigation.navigate("portfolio");
+        break;
       default:
         navigation.navigate("adminorders");
         break;
@@ -93,6 +96,11 @@ const AdminPanel = ({ navigation }) => {
                 <ButtonBox
                   icon={"plus"}
                   text={"Category"}
+                  handler={navigationHandler}
+                />
+                <ButtonBox
+                  icon={"plus"}
+                  text={"Portfolio"}
                   handler={navigationHandler}
                 />
               </View>
