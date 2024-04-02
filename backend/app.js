@@ -29,12 +29,10 @@ app.get("/", (req, res, next) => {
 import user from "./routes/user.js";
 import service from "./routes/service.js";
 import order from "./routes/order.js";
-import portfolio from "./routes/portfolio.js";
 
 app.use("/api/v1/user", user);
 app.use("/api/v1/service", service);
 app.use("/api/v1/order", order);
-app.use("/api/v1/portfolio", portfolio);
 
 // Using Error Middleware
 app.use(errorMiddleware);

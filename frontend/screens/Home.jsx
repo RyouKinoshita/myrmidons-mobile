@@ -5,7 +5,6 @@ import { Avatar, Button } from "react-native-paper";
 import Header from "../components/Header";
 import SearchModal from "../components/SearchModal";
 import ServiceCard from "../components/ServiceCard";
-import PortfolioCard from "../components/PortfolioCard";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
 import Heading from "../components/Heading";
@@ -209,32 +208,6 @@ const Home = () => {
                   key={item._id}
                   i={index}
                   navigate={navigate}
-                />
-              ))}
-            </ScrollView>
-          </View>
-
-          {/* Portfolios */}
-          <View style={{ marginTop: 40 }}>
-            <View>
-              <Text style={{ fontSize: 25 }}>
-                Our
-                <Text style={{ fontSize: 25, fontWeight: "900" }}>
-                  {" "}
-                  Projects
-                </Text>
-              </Text>
-            </View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {portfolios.map((item, index) => (
-                <PortfolioCard
-                  name={item.name}
-                  location={item.location}
-                  date={item.date}
-                  image={item.images[0]?.url}
-                  id={item._id}
-                  key={item._id}
-                  i={index}
                 />
               ))}
             </ScrollView>

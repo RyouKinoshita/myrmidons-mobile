@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import { Avatar, Button } from "react-native-paper";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { colors, formHeading } from "../../styles/styles";
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
 import ButtonBox from "../../components/ButtonBox";
 import ServiceListHeading from "../../components/ServiceListHeading";
-import { services } from "../Home";
 import ServiceListItem from "../../components/ServiceListItem";
 import Footer from "../../components/Footer";
 import Chart from "../Chart";
@@ -38,10 +30,6 @@ const AdminPanel = ({ navigation }) => {
         break;
       case "Service":
         navigation.navigate("newservice");
-        break;
-
-      case "Portfolio":
-        navigation.navigate("portfolio");
         break;
       default:
         navigation.navigate("adminorders");
@@ -96,11 +84,6 @@ const AdminPanel = ({ navigation }) => {
                 <ButtonBox
                   icon={"plus"}
                   text={"Category"}
-                  handler={navigationHandler}
-                />
-                <ButtonBox
-                  icon={"plus"}
-                  text={"Portfolio"}
                   handler={navigationHandler}
                 />
               </View>
