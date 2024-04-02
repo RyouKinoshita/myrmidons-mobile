@@ -1,90 +1,61 @@
-import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
-import { colors, defaultStyle, formHeading } from '../styles/styles'
-import Header from '../components/Header'
-import Loader from '../components/Loader'
-import { Headline } from 'react-native-paper'
-import OrderItem from './OrderItem'
-import Footer from '../components/Footer'
-
-export const orders = [
-  {
-    _id: "asdasdasd",
-    shippingInfo: {
-      address: "73 Easter",
-      city: "New York",
-      Country: "India",
-      pinCode: 221231
-    },
-    createdAt: "12-2022T3231",
-    orderStatus: "Processing",
-    paymentMethod: "COD",
-    totalAmount: 20000,
-  },
-  {
-    _id: "wews",
-    shippingInfo: {
-      address: "73 Alabang",
-      city: "Manila",
-      Country: "Philippines",
-      pinCode: 123512
-    },
-    createdAt: "12-2022T3231",
-    orderStatus: "Delivered",
-    paymentMethod: "ONLINE",
-    totalAmount: 4500,
-  },
-]
-
-const loading = false
+import { View, Text, ScrollView } from "react-native";
+import React from "react";
+import { colors, defaultStyle, formHeading } from "../styles/styles";
+import Header from "../components/Header";
+import Loader from "../components/Loader";
+import { Headline } from "react-native-paper";
+import OrderItem from "./OrderItem";
+import Footer from "../components/Footer";
+import { useGetOrders } from "../utils/hooks";
+import { useIsFocused } from "@react-navigation/native";
 
 const Order = () => {
+  const isFocused = useIsFocused();
+  const { loading, orders } = useGetOrders(isFocused);
   return (
     <>
-    <View style={{ ...defaultStyle, backgroundColor: colors.color5 }}>
+      <View style={{ ...defaultStyle, backgroundColor: colors.color5 }}>
+        <Header back={true} />
 
-      <Header back={true} />
+        <View style={{ marginBottom: 20, paddingTop: 70 }}>
+          <Text style={formHeading}>Orders</Text>
+        </View>
 
-      {/* Heading */}
-      <View style={{ marginBottom: 20, paddingTop: 70 }}>
-        <Text style={formHeading}>Orders</Text>
-      </View>
-
-      {
-        loading ? <Loader /> : (
+        {loading ? (
+          <Loader />
+        ) : (
           <View
             style={{
               padding: 10,
               flex: 1,
-            }}>
-           <ScrollView showsVerticalScrollIndicator={false}>
-            {orders.length > 0 ? (
-              orders.map((item, index) => (
-                <OrderItem
-                  key={item._id}
-                  id={item._id}
-                  i={index}
-                  price={item.totalAmount}
-                  status={item.orderStatus}
-                  paymentMethod={item.paymentMethod}
-                  orderedOn={item.createdAt.split("T")[0]}
-                  address={`${item.shippingInfo.address}, ${item.shippingInfo.city}, ${item.shippingInfo.country} ${item.shippingInfo.pinCode}`}
-                />
-              ))
-            ) : (
-              <Headline style={{ textAlign: "center" }}>No Orders Yet</Headline>
-            )}
-          </ScrollView>
+            }}
+          >
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {orders.length > 0 ? (
+                orders.map((item, index) => (
+                  <OrderItem
+                    key={item._id}
+                    id={item._id}
+                    i={index}
+                    price={item.totalAmount}
+                    status={item.orderStatus}
+                    paymentMethod={item.paymentMethod}
+                    orderedOn={item.createdAt.split("T")[0]}
+                    address={`${item.eventInfo.address}, ${item.eventInfo.city}, ${item.eventInfo.country} ${item.eventInfo.pinCode}`}
+                  />
+                ))
+              ) : (
+                <Headline style={{ textAlign: "center" }}>
+                  No Orders Yet
+                </Headline>
+              )}
+            </ScrollView>
           </View>
-        )
-      }
-
-    </View>
-<Footer/>
+        )}
+      </View>
+      <Footer />
     </>
-  )
+  );
+};
 
-  
-}
-
-export default Order
+export default Order;

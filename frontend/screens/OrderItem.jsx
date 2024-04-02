@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { colors } from "../styles/styles";
 import { Button } from "react-native-paper";
-
+import { useRoute } from "@react-navigation/native";
 const OrderItem = ({
   id,
   price,
@@ -15,6 +15,7 @@ const OrderItem = ({
   loading,
   i = 0,
 }) => {
+  const route = useRoute();
   return (
     <View
       style={{
@@ -37,7 +38,7 @@ const OrderItem = ({
       <TextBox title={"Status"} value={status} i={i} />
       <TextBox title={"Payment Method"} value={paymentMethod} i={i} />
 
-      {admin && (
+      {admin && route.name === "adminorders" && (
         <Button
           icon={"update"}
           mode={"contained"}

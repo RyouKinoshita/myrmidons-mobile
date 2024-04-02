@@ -27,7 +27,7 @@ const Chart = ({ inStock = 0, outOfStock = 0 }) => {
     color: (opacity = 1) => `rgba(255, 159, 67, ${opacity})`, // Orange color
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
-    useShadowColorFromDataset: false // optional
+    useShadowColorFromDataset: false, // optional
   };
 
   return (
@@ -38,7 +38,7 @@ const Chart = ({ inStock = 0, outOfStock = 0 }) => {
         height={130}
         chartConfig={chartConfig}
         accessor={"population"}
-        backgroundColor="{colors.color3}"
+        backgroundColor={"transparent"}
         absolute
       />
     </View>
