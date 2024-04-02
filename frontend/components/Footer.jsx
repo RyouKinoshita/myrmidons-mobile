@@ -40,6 +40,7 @@ const Footer = ({ activeRoute = "home" }) => {
   return (
     loading === false && (
       <View style={styles.footer}>
+      
         <TouchableOpacity
           style={styles.icon}
           activeOpacity={0.8}
@@ -78,6 +79,8 @@ const Footer = ({ activeRoute = "home" }) => {
             }
           />
         </TouchableOpacity>
+
+        
       </View>
     )
   );

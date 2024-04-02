@@ -174,6 +174,7 @@ const Profile = ({ navigation, route }) => {
                 icon={"lock"}
               />
             </View>
+            
 
             <View style={styles.transactionHistoryContainer}>
               <TransactionHistory />
