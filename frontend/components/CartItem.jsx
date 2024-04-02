@@ -50,7 +50,7 @@ export const CartItem = ({
           style={{
             fontSize: 17,
           }}
-          onPress={() => navigate.navigate("productdetails", { id })}
+          onPress={() => navigate.navigate("servicedetails", { id })}
         >
           {name}
         </Text>

@@ -18,7 +18,7 @@ const SearchModal = ({
   searchQuery,
   setActiveSearch,
   setSearchQuery,
-  products = [],
+  services = [],
 }) => {
   const navigate = useNavigation();
 
@@ -66,14 +66,14 @@ const SearchModal = ({
               paddingHorizontal: 10,
             }}
           >
-            {products.map((i) => (
+            {services.map((i) => (
               <SearchItem
                 key={i._id}
                 imgSrc={i.images[0]?.url}
                 name={i.name}
                 price={i.price}
                 handler={() =>
-                  navigate.navigate("productdetails", { id: i._id })
+                  navigate.navigate("servicedetails", { id: i._id })
                 }
               />
             ))}

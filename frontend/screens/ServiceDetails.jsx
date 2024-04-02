@@ -43,7 +43,7 @@ const ServiceDetails = ({ route: { params } }) => {
     dispatch({
       type: "addToCart",
       payload: {
-        product: params.id,
+        service: params.id,
         name,
         price,
         image: images[0]?.url,

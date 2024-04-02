@@ -35,7 +35,7 @@ const ConfirmOrder = () => {
         <ScrollView>
           {cartItems.map((i) => (
             <ConfirmOrderItem
-              key={i.product}
+              key={i.service}
               price={i.price}
               image={i.image}
               name={i.name}

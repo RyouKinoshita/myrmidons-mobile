@@ -1,18 +1,50 @@
-import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
-import React, { useState } from "react";
+import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
 import { colors, defaultStyle, formHeading } from "../../styles/styles";
 import Header from "../../components/Header";
 import ImageCard from "../../components/ImageCard";
 import { Avatar, Button } from "react-native-paper";
+import { useMessageAndErrorOther } from "../../utils/hooks";
+import { useDispatch } from "react-redux";
+import mime from "mime";
+import {
+  deleteServiceImage,
+  updateServiceImage,
+} from "../../redux/actions/otherAction";
 
-const loading = false;
-const submitHandler = () => {};
-const deleteHandler = () => {};
 const ServiceImages = ({ navigation, route }) => {
   const [images] = useState(route.params.images);
   const [serviceId] = useState(route.params.id);
   const [image, setImage] = useState(null);
   const [imageChanged, setImageChanged] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const loading = useMessageAndErrorOther(dispatch, navigation, "adminpanel");
+
+  const deleteHandler = (imageId) => {
+    dispatch(deleteServiceImage(serviceId, imageId));
+  };
+
+  const submitHandler = () => {
+    const myForm = new FormData();
+
+    myForm.append("file", {
+      uri: image,
+      type: mime.getType(image),
+      name: image.split("/").pop(),
+    });
+
+    dispatch(updateServiceImage(serviceId, myForm));
+  };
+
+  useEffect(() => {
+    if (route.params?.image) {
+      setImage(route.params.image);
+      setImageChanged(true);
+    }
+  }, [route.params]);
+
   return (
     <View
       style={{

@@ -33,7 +33,7 @@ const Header = ({ back, emptyCart = false }) => {
             }}
             icon={"arrow-left"}
             color={
-              route.name === "productdetails" ? colors.color2 : colors.color3
+              route.name === "servicedetails" ? colors.color2 : colors.color3
             }
             size={40} // Set the size of the icon
           />
@@ -56,7 +56,7 @@ const Header = ({ back, emptyCart = false }) => {
             }}
             icon="delete-outline"
             color={
-              route.name === "productdetails" ? colors.color2 : colors.color3
+              route.name === "servicedetails" ? colors.color2 : colors.color3
             }
             size={40} // Set the size of the icon
           />

@@ -247,7 +247,7 @@ export const createService = (formData) => async (dispatch) => {
 };
 
 export const updateService =
-  (id, name, description, price, stock, category) => async (dispatch) => {
+  (id, name, description, price, category) => async (dispatch) => {
     try {
       dispatch({
         type: "updateServiceRequest",
@@ -258,7 +258,6 @@ export const updateService =
           name,
           description,
           price,
-          stock,
           category,
         },
         {
