@@ -18,6 +18,10 @@ const schema = new mongoose.Schema({
       type: Number,
       required: true,
     },
+    date: {
+      type: String,
+      required: true,
+    },
   },
 
   orderItems: [
@@ -26,15 +30,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      date: {
-        type: String,
-        required: true,
-      },
       price: {
-        type: Number,
-        required: true,
-      },
-      quantity: {
         type: Number,
         required: true,
       },
