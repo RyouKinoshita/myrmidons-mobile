@@ -420,7 +420,7 @@ export const resetPassword = (otp, password) => async (dispatch) => {
 export const createPortfolio = (formData) => async (dispatch) => {
   try {
     dispatch({
-      type: "createPortfolioRequest",
+      type: "addPortfolioRequest",
     });
 
     const { data } = await axios.post(`${server}/portfolio/new`, formData, {
@@ -431,12 +431,127 @@ export const createPortfolio = (formData) => async (dispatch) => {
     });
 
     dispatch({
-      type: "createPortfolioSuccess",
+      type: "addPortfolioSuccess",
       payload: data.message,
     });
   } catch (error) {
     dispatch({
-      type: "createPortfolioFail",
+      type: "addPortfolioFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updatePortfolio =
+  (id, name, description, price, category) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "updatePortfolioRequest",
+      });
+      const { data } = await axios.put(
+        `${server}/portfolio/single/${id}`,
+        {
+          name,
+          description,
+          price,
+          category,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      dispatch({
+        type: "updatePortfolioSuccess",
+        payload: data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: "updatePortfolioFail",
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const updatePortfolioImage =
+  (portfolioId, formData) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "updatePortfolioImageRequest",
+      });
+
+      const { data } = await axios.post(
+        `${server}/portfolio/images/${portfolioId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+
+      dispatch({
+        type: "updatePortfolioImageSuccess",
+        payload: data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: "updatePortfolioImageFail",
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const deletePortfolioImage =
+  (portfolioId, imageId) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "deletePortfolioImageRequest",
+      });
+
+      const { data } = await axios.delete(
+        `${server}/portfolio/images/${portfolioId}?id=${imageId}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch({
+        type: "deletePortfolioImageSuccess",
+        payload: data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: "deletePortfolioImageFail",
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const deletePortfolio = (portfolioId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "deletePortfolioRequest",
+    });
+
+    const { data } = await axios.delete(
+      `${server}/portfolio/single/${portfolioId}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: "deletePortfolioSuccess",
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: "deletePortfolioFail",
       payload: error.response.data.message,
     });
   }
