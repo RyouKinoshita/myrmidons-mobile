@@ -129,7 +129,7 @@ const Home = () => {
             </View>
 
             {/* search bar */}
-            <View>
+            {/* <View>
               <TouchableOpacity
                 onPress={() => setActiveSearch((prev) => !prev)}
               >
@@ -140,7 +140,7 @@ const Home = () => {
                   style={{ backgroundColor: colors.color1, elevation: 12 }}
                 />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
 
           {/* Categories */}
@@ -158,7 +158,7 @@ const Home = () => {
               }}
               showsHorizontalScrollIndicator={false}
             >
-              {/* <Button
+              <Button
                 style={{
                   backgroundColor:
                     category === "all" ? colors.color1 : colors.color5,
@@ -178,7 +178,7 @@ const Home = () => {
                 >
                   All
                 </Text>
-              </Button> */}
+              </Button>
               {categories.map((item, index) => (
                 <Button
                   key={item._id}
@@ -208,7 +208,6 @@ const Home = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {services.map((item, index) => (
                 <ServiceCard
-                  stock={item.stock}
                   name={item.name}
                   price={item.price}
                   image={item.images[0]?.url}
