@@ -4,18 +4,7 @@ import { colors } from "../styles/styles";
 import { Avatar } from "react-native-paper";
 import { iconOptions } from "../screens/ServiceDetails";
 
-export const CartItem = ({
-  name,
-  amount,
-  qty,
-  stock,
-  index,
-  imgSrc,
-  id,
-  decrementHandler,
-  incrementhandler,
-  navigate,
-}) => {
+export const CartItem = ({ name, amount, index, imgSrc, id, navigate }) => {
   return (
     <View
       style={{
@@ -66,7 +55,7 @@ export const CartItem = ({
         </Text>
       </View>
 
-      <View style={styles.qtyContainer}>
+      {/* <View style={styles.qtyContainer}>
         <TouchableOpacity
           onPress={() => decrementHandler(id, name, amount, imgSrc, stock, qty)}
         >
@@ -80,7 +69,7 @@ export const CartItem = ({
         >
           <Avatar.Icon icon={"plus"} {...iconOptions} />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

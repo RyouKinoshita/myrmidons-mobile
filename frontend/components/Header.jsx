@@ -3,15 +3,20 @@ import React from "react";
 import { Avatar } from "react-native-paper";
 import { colors } from "../styles/styles";
 import { useNavigation, useRoute } from "@react-navigation/native";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 const Header = ({ back, emptyCart = false }) => {
   const navigate = useNavigation();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const route = useRoute();
   const emptyCartHandler = () => {
     dispatch({
       type: "clearCart",
+    });
+    Toast.show({
+      type: "info",
+      text1: "Removed all items from cart",
     });
   };
 

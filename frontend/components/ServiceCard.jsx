@@ -79,7 +79,7 @@ const ServiceCard = ({
           style={{
             backgroundColor: i % 2 === 0 ? colors.color2 : colors.color3,
             borderRadius: 0,
-            paddingVertical: 5,
+            paddingVertical: 8,
             borderBottomRightRadius: 20,
             borderBottomLeftRadius: 20,
             width: "100%",

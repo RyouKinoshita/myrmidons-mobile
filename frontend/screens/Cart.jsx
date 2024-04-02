@@ -12,63 +12,10 @@ import Footer from "../components/Footer";
 
 const Cart = () => {
   const navigate = useNavigation();
+  const dispatch = useDispatch();
 
-  const cartItems = [
-    {
-      name: "item1",
-      image: "https://picsum.photos/id/69/400/300",
-      service: "asdf",
-      stock: 2,
-      price: 123,
-      quantity: 2,
-    },
-    {
-      name: "item2",
-      image: "https://picsum.photos/id/89/400/300",
-      service: "qwer",
-      stock: 4,
-      price: 12345,
-      quantity: 5,
-    },
-  ];
+  const { cartItems } = useSelector((state) => state.cart);
 
-  const incrementHandler = (id, name, price, image, stock, quantity) => {
-    const newQty = quantity + 1;
-    if (stock <= quantity)
-      return Toast.show({
-        type: "error",
-        text1: "Maximum value added",
-      });
-    dispatch({
-      type: "addToCart",
-      payload: {
-        service: id,
-        name,
-        price,
-        image,
-        stock,
-        quantity: newQty,
-      },
-    });
-  };
-
-  const decrementHandler = (id, name, price, image, stock, quantity) => {
-    const newQty = quantity - 1;
-
-    if (1 >= quantity) return dispatch({ type: "removeFromCart", payload: id });
-
-    dispatch({
-      type: "addToCart",
-      payload: {
-        service: id,
-        name,
-        price,
-        image,
-        stock,
-        quantity: newQty,
-      },
-    });
-  };
   return (
     <>
       <View
@@ -99,18 +46,14 @@ const Cart = () => {
                   key={i.service}
                   id={i.service}
                   name={i.name}
-                  stock={i.stock}
                   amount={i.price}
                   imgSrc={i.image}
                   index={index}
-                  qty={i.quantity}
-                  incrementhandler={incrementHandler}
-                  decrementHandler={decrementHandler}
                 />
               ))
             ) : (
               <Text style={{ textAlign: "center", fontSize: 18 }}>
-                No Items Yet
+                No items in your shopping cart, start browsing now!
               </Text>
             )}
           </ScrollView>
@@ -122,8 +65,8 @@ const Cart = () => {
             paddingHorizontal: 35,
           }}
         >
-          <Text>10 Items</Text>
-          <Text>₱ 10</Text>
+          <Text>{cartItems.length} Items</Text>
+          <Text>₱{cartItems.reduce((prev, curr) => prev + curr.price, 0)}</Text>
         </View>
 
         <TouchableOpacity

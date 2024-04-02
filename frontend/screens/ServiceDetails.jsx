@@ -47,7 +47,6 @@ const ServiceDetails = ({ route: { params } }) => {
         name,
         price,
         image: images[0]?.url,
-        quantity,
       },
     });
     Toast.show({

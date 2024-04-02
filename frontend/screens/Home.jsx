@@ -56,27 +56,20 @@ const Home = () => {
   const categoryButtonHandler = (id) => {
     setCategory(id);
   };
-  const addToCardHandler = (id, name, price, image, stock) => {
-    // if (stock === 0)
-    //   return Toast.show({
-    //     type: "error",
-    //     text1: "Out Of Stock",
-    //   });
-    // dispatch({
-    //   type: "addToCart",
-    //   payload: {
-    //     service: id,
-    //     name,
-    //     price,
-    //     image,
-    //     stock,
-    //     quantity: 1,
-    //   },
-    // });
-    // Toast.show({
-    //   type: "success",
-    //   text1: "Added To Cart",
-    // });
+  const addToCardHandler = (id, name, price, image) => {
+    dispatch({
+      type: "addToCart",
+      payload: {
+        service: id,
+        name,
+        price,
+        image,
+      },
+    });
+    Toast.show({
+      type: "success",
+      text1: "Added To Cart",
+    });
     console.log("Add to cart", id);
   };
 
