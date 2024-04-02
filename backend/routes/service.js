@@ -9,6 +9,7 @@ import {
   getAdminServices,
   getAllCategories,
   getAllServices,
+  listAllServices,
   getServiceDetails,
   updateService,
 } from "../controllers/service.js";
@@ -18,6 +19,7 @@ import { singleUpload } from "../middlewares/multer.js";
 const router = express.Router();
 
 router.get("/all", getAllServices);
+router.get("/allservices", listAllServices);
 router.get("/admin", isAuthenticated, isAdmin, getAdminServices);
 
 router

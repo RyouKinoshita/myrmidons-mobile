@@ -10,6 +10,9 @@ export const serviceReducer = createReducer(
       .addCase("getAllServicesRequest", (state) => {
         state.loading = true;
       })
+      .addCase("listAllServicesRequest", (state) => {
+        state.loading = true;
+      })
       .addCase("getAdminServicesRequest", (state) => {
         state.loading = true;
       })
@@ -17,6 +20,10 @@ export const serviceReducer = createReducer(
         state.loading = true;
       })
       .addCase("getAllServicesSuccess", (state, action) => {
+        state.loading = false;
+        state.services = action.payload;
+      })
+      .addCase("listAllServicesSuccess", (state, action) => {
         state.loading = false;
         state.services = action.payload;
       })
@@ -30,6 +37,10 @@ export const serviceReducer = createReducer(
       })
 
       .addCase("getAllServicesFail", (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase("listAllServicesFail", (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

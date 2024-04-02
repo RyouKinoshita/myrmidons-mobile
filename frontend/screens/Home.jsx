@@ -10,7 +10,10 @@ import { useIsFocused, useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
 import Heading from "../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllServices } from "../redux/actions/serviceAction";
+import {
+  getAllServices,
+  listAllServices,
+} from "../redux/actions/serviceAction";
 import { useSetCategories } from "../utils/hooks";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 
@@ -155,6 +158,27 @@ const Home = () => {
               }}
               showsHorizontalScrollIndicator={false}
             >
+              {/* <Button
+                style={{
+                  backgroundColor:
+                    category === "all" ? colors.color1 : colors.color5,
+                  borderRadius: 100,
+                  margin: 3,
+                }}
+                onPress={() => {
+                  setCategory("all");
+                  dispatch(listAllServices());
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: category === "all" ? colors.color2 : "gray",
+                  }}
+                >
+                  All
+                </Text>
+              </Button> */}
               {categories.map((item, index) => (
                 <Button
                   key={item._id}

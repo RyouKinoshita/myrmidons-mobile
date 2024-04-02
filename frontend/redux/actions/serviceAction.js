@@ -25,6 +25,27 @@ export const getAllServices = (keyword, category) => async (dispatch) => {
   }
 };
 
+export const listAllServices = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "listAllServicesRequest",
+    });
+    const { data } = await axios.get(`${server}/service/allservices`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "listAllServicesSuccess",
+      payload: data.services,
+    });
+  } catch (error) {
+    dispatch({
+      type: "listAllServicesFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const getAdminServices = () => async (dispatch) => {
   try {
     dispatch({

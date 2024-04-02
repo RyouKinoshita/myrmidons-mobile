@@ -5,6 +5,15 @@ import { getDataUri } from "../utils/features.js";
 import cloudinary from "cloudinary";
 import { Category } from "../models/category.js";
 
+export const listAllServices = asyncError(async (req, res, next) => {
+  const services = await Service.find({});
+
+  res.status(200).json({
+    success: true,
+    services,
+  });
+});
+
 export const getAllServices = asyncError(async (req, res, next) => {
   const { keyword, category } = req.query;
 
