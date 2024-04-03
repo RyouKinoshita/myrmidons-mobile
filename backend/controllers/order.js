@@ -24,10 +24,16 @@ export const createOrder = asyncError(async (req, res, next) => {
     shippingCharges,
     totalAmount,
   });
-  const eventInfoStr = eventInfo.map((item) => JSON.stringify(item)).join(" ");
-  const orderItemsStr = orderItems
-    .map((item) => `${item.name}: ${item.price}`)
-    .join(", ");
+  const eventInfoStr = Object.entries(eventInfo)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(" ");
+
+  const orderItemsStr = Object.entries(orderItems)
+    .map(([key, value]) =>
+      key === "name" || key === "price" ? `${key}: ${value}` : ""
+    )
+    .filter(Boolean)
+    .join(" ");
 
   const subject = "Your order summary";
   const text = `You have placed an order with the following details:\n
