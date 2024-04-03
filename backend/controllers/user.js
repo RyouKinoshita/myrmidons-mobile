@@ -197,3 +197,12 @@ export const resetpassword = asyncError(async (req, res, next) => {
     message: "Password changed successfully, login with your new password",
   });
 });
+
+export const getAllUser = asyncError(async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({ success: true, data: users });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});

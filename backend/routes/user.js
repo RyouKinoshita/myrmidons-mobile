@@ -9,6 +9,7 @@ import {
   signup,
   updatePic,
   updateProfile,
+  getAllUser,
 } from "../controllers/user.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 import { singleUpload } from "../middlewares/multer.js";
@@ -20,6 +21,7 @@ router.post("/login", login);
 router.post("/new", singleUpload, signup);
 
 router.get("/me", isAuthenticated, getMyProfile);
+router.get("/users", isAuthenticated, getAllUser);
 router.get("/logout", isAuthenticated, logOut);
 
 // Updating Routes
