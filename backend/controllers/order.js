@@ -24,6 +24,18 @@ export const createOrder = asyncError(async (req, res, next) => {
     totalAmount,
   });
 
+  const subject = "Order Summary";
+  const text = `You have placed an order with the following details:\n
+                Event Info: ${eventInfo}\n
+                Order Items: ${orderItems}\n
+                Payment Method: ${paymentMethod}\n
+                Items Price: ${itemsPrice}\n
+                Tax Price: ${taxPrice}\n
+                Shipping Charges: ${shippingCharges}\n
+                Total Amount: ${totalAmount}`;
+
+  await sendEmail(subject, req.user.email, text);
+
   res.status(201).json({
     success: true,
     message: "Order Placed Successfully",
