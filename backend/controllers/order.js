@@ -26,8 +26,8 @@ export const createOrder = asyncError(async (req, res, next) => {
   });
   const eventInfoStr = eventInfo.map((item) => JSON.stringify(item)).join(" ");
   const orderItemsStr = orderItems
-    .map((item) => JSON.stringify(item))
-    .join(" ");
+    .map((item) => `${item.name}: ${item.price}`)
+    .join(", ");
 
   const subject = "Your order summary";
   const text = `You have placed an order with the following details:\n
